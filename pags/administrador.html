@@ -1,0 +1,1341 @@
+<div class="vistafondo panelfondo">
+
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+      <header class="headergestion mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600 mdl-typography--text-center">
+        <div class="mdl-layout__header-row mdl-typography--text-center">
+          <span class="mdl-layout-title"><i class="material-icons" >work</i> Panel de Administración</span>
+          <div class="mdl-layout-spacer"></div>
+        </div>
+        <div class="misesion"> <a ng-click="cerrarSesion()" class="cerrarsesi mdl-color-text--blue-grey-50 mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-50 material-icons" >cancel</i> Cerrar sesión</a></div>
+      </header>
+      <div class="gestorbarra  mdl-layout__drawer">
+        <header class="cabeceragestor mdl-typography--text-center">
+          <img src="img/usuario/avatar.jpg" class="avatar">
+          <div class="demo-avatar-dropdown">
+            <span>{{user.email}}</span>
+            <div class="mdl-layout-spacer"></div>
+            <button sidabled class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+              <i class="material-icons" >arrow_drop_down</i>
+              <span class="visuallyhidden">Accounts</span>
+            </button>
+          </div>
+          <a ng-click="editarPerfil()" class="editarperfi mdl-color-text--blue-grey-50 mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-50 material-icons" >edit</i> Editar perfil</a><br>
+     
+        </header>
+  
+        <nav class="barragestor mdl-navigation">
+          <div class="titulobarra">
+          	<span">Todos los productos</span> 
+          </div>
+		  <div class="titulobarra">
+	          <a ng-click="verProductos()" class="mdl-color-text--blue-grey-50 mdl-navigation__link " href="">
+	          	<i class="mdl-color-text--blue-grey-50 material-icons">shopping_cart</i>Productos
+	          </a>
+          </div>
+          <div class="titulobarra">
+          	<a class="enlace" href="" ng-click="verlasTiendas()">Productos por tienda</a> 
+          </div>
+         
+
+         <div ng-if="verportienda">
+         	
+	          <div ng-repeat="tienda in otrastiendas">
+
+	          <a ng-click="verxTienda()" class="mdl-color-text--blue-grey-50 mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-50 material-icons" >store</i>Tienda {{tienda.nombre}}</a>
+	          </div>
+
+         </div>
+
+		<div class="titulobarra">
+          	<a class="enlace" href="" ng-click="verlascateogrias()">Productos por categoría</a> 
+        </div>
+
+			<div ng-if="verporcatego">
+				
+				<div ng-repeat="categoria in categorias">
+					 <a ng-click="verxCategoria()" class="mdl-color-text--blue-grey-50 mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-50 material-icons">shopping_basket</i>{{categoria.nombre}}</a>
+	              
+	            </div>
+			</div>
+		<div class="titulobarra">
+          <a ng-click="verLosEventos()" class="mdl-color-text--blue-grey-50 mdl-navigation__link" href=""><i class="material-icons" role="presentation">event</i>Eventos</a>
+        </div>
+       
+		<div>
+			<a ng-click="lastiendas()" class="mdl-color-text--blue-grey-50 mdl-navigation__link" href=""><i  class=" material-icons" role="presentation" >store</i>Tiendas</a>
+		</div>
+		
+
+		<div class="titulobarra">
+        <span>Lista de reservas</span>
+        </div>
+		<div>
+			<a class="mdl-color-text--blue-grey-50 mdl-navigation__link" ng-click="verlosproductos()" href=""><i class=" material-icons" role="presentation" >shopping_cart</i>Productos</a>
+		</div>
+		<div>
+			<a class="mdl-color-text--blue-grey-50 mdl-navigation__link" ng-click="verloseventos()" href=""><i class=" material-icons" role="presentation" >event</i>Eventos</a>
+		</div>
+        </nav>
+      </div>
+
+      <main class="panel mdl-layout__content mdl-color--grey-100 vistafondo panelfondo">
+
+       	<div ng-if="productovisible">
+       		<table class="tblsize mdl-data-table mdl-js-data-table mdl-data-table--sectable mdl-shadow--2dp">
+				<caption > <h5>Productos <span class="badge">Total: {{articulos.length}}</span></h5></caption>
+					<thead>
+						<tr>
+							<th  class="tbimagen mdl-data-table__cell--non-numeric">Imagen</th>
+							<th class="tbnombre mdl-data-table__cell--non-numeric">Nombre</th>
+							<th class="tbdescripcion mdl-data-table__cell--non-numeric">Descripción</th>
+							<th class="tbprecio">Precio</th>
+							<th class="tbstock">Stock</th>
+							<th class="tbtienda mdl-data-table__cell--non-numeric">Tienda</th>
+							<th class="tbtienda mdl-data-table__cell--non-numeric">Categoría</th>
+							<th class="tbtienda mdl-data-table__cell--non-numeric">Estado</th>			
+							<th class="tbboton mdl-data-table__cell--non-numeric">
+								<button class="btnplus mdl-button mdl-js-button mdl-button--icon" ng-click="anadir()"><i class="material-icons">add</i>
+								</button>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+							
+						<tr ng-repeat="articulo in articulos">
+										
+							<td class="tbimagen mdl-data-table__cell--non-numeric"><img class="imgtabla" ng-src="{{articulo.imagen[0].ruta}}" alt=""></td>
+							<td class="tbnombre mdl-data-table__cell--non-numeric">{{articulo.nombre}}</td>
+							<td class="tbdescripcion mdl-data-table__cell--non-numeric">{{articulo.descripcion | lowercase}}</td>
+							<td class="tbprecio">{{articulo.precio | euros: '€'}}</td>
+							<td class="tbstock">{{articulo.stock}}</td>
+							<td class="tbtienda mdl-data-table__cell--non-numeric">{{articulo.tienda[0].nombre}}</td>
+							<td class="tbtienda mdl-data-table__cell--non-numeric">{{articulo.categoria[0].nombre}}</td>
+							<td class="tbtienda mdl-data-table__cell--non-numeric">{{articulo.estado[0].nombre}}</td>
+							<td class="tbboton mdl-data-table__cell--non-numeric">
+
+								<button ng-click="modifica()" class="btneditar mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">search</i>
+								</button>
+								<button ng-click="borrar()"  class="btnborrar mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">close</i>
+								</button>
+							</td>
+						</tr>
+					</tbody>	
+			</table>
+		</div>
+
+
+
+			<div ng-if="eventovisible">
+			  <div class="fechaeventgest mdl-grid mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-card mdl-shadow--4dp">
+                                <div class="fechabu mdl-cell mdl-cell--12-col">
+                                    <h2 class="mdl-card__title-text ">Buscar por fecha:</h2>
+                                 </div>
+								        <div class="mdl-cell mdl-cell--4-col-tablet mdl-cell--4-col">
+
+                                    <div class="mdl-card__supporting-text">
+                                    	<p><i class="material-icons">date_range</i>Desde </p>
+    					 							
+							    				<input data-date-format="dd/mm/yyyy" class="mdl-textfield__input" id="fecha1" ng-model="fech1a" placeholder="dd/mm/aaa" type="date">				   
+                                    </div>
+                                     
+                                </div>
+
+                                <div class="mdl-cell mdl-cell--4-col-tablet mdl-cell--4-col">
+
+                                    <div class="mdl-card__supporting-text">
+                                    	<p><i class="material-icons">date_range</i>Hasta</p>
+                                    						 							  					
+							    	<input data-date-format="dd/mm/yyyy" class="mdl-textfield__input" id="fecha2" ng-model="fech2a" type="date">			   
+                                    </div>
+                                     
+                                </div>
+                                <div class="mdl-cell mdl-cell--12-col-tablet mdl-cell--4-col">
+
+                                    <div class="mdl-card__supporting-text mdl-typography--text-center"><br>
+                                    	<button ng-click="buscarxFecha()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+  										                Buscar
+									                   </button>
+                                    </div>
+                                     
+                                </div>
+            </div>
+			
+
+			<table class="tblevento mdl-data-table mdl-js-data-table mdl-data-table--sectable mdl-shadow--2dp">
+				<caption > <h5>Eventos <span class="badge">Total: {{eventos1.length}}</span></h5></caption>
+					<thead>
+						<tr>
+							<th class="tbimagen mdl-data-table__cell--non-numeric">Imagen</th>
+							<th class="tbnombre mdl-data-table__cell--non-numeric">Nombre</th>
+							<th class="tbdescripcion mdl-data-table__cell--non-numeric">Descripción</th>
+							<th class="tbprecio">Precio</th>
+							<th class="tbentradas">Nº entradas</th>
+							<th class="tbtienda mdl-data-table__cell--non-numeric">Aforo</th>
+							<th class="tbtienda mdl-data-table__cell--non-numeric">Fecha</th>
+							<th class="tbbotoneve mdl-data-table__cell--non-numeric">
+								
+								<div class="mdl-grid">
+							 				
+								  <div class="mdl-cell mdl-cell--3-col" >
+										<div id="masevento">
+											<button  class="btnplus mdl-button mdl-js-button mdl-button--icon" ng-click="anadireve()"><i class="material-icons">add</i>
+											</button>
+										</div>
+										<div class="mdl-tooltip" data-mdl-for="masevento">
+										<strong>Añadir evento</strong>
+										</div>
+
+								</div>
+							 		<div class="mdl-cell mdl-cell--2-col" >
+										
+
+								</div>
+							 						
+								  <div class="mdl-cell mdl-cell--3-col" >
+										<div id="maslugar">
+											<button class="btnlugar mdl-button mdl-js-button mdl-button--icon" ng-click="anadirevelug()"><i class="material-icons">add_location</i>
+											</button>
+										</div>
+										<div class="mdl-tooltip" data-mdl-for="maslugar">
+										<strong>Añadir lugar y otros datos</strong>
+										</div>
+								</div>
+								</div>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+							
+						<tr ng-repeat="evento in eventos1">
+										
+							<td class="tbimagen mdl-data-table__cell--non-numeric"><img class="imgtabla" ng-src="{{evento.imagen}}" alt=""></td>
+							<td class="tbnombre mdl-data-table__cell--non-numeric">{{evento.nombre}}</td>
+							<td class="tbdescripcion mdl-data-table__cell--non-numeric">{{evento.descripcion | lowercase}}</td>
+							<td class="tbprecio">{{evento.precio | euros: '€'}}</td>
+							<td class="">{{evento.entradas_disponibles}}</td>
+							<td class="tbtienda">{{evento.aforo}}</td>
+							<td class="tbtienda mdl-data-table__cell--non-numeric">{{evento.fecha}}</td>
+										
+							<td class="tbbotoneve mdl-data-table__cell--non-numeric">
+								<button ng-click="editareve()" class="btneditar mdl-button mdl-js-button mdl-button--icon">
+									<i class="material-icons">search</i>
+								</button>
+								<button ng-click="anadirParticipante()" class="btnparticipante mdl-button mdl-js-button mdl-button--icon">
+									<i class="material-icons">person_add</i>
+								</button>
+								<button ng-click="borrarParticipante()"  class="btnborrar mdl-button mdl-js-button mdl-button--icon">
+									<i class="material-icons">person_add_disabled</i>
+								</button>
+								<button ng-click="anadirFechaPosible()" ng-disabled="evento.fecha != null"  class="btnfecha mdl-button mdl-js-button mdl-button--icon">
+									<i class="material-icons">date_range</i>
+								</button>
+							</td>
+						</tr>
+					</tbody>	
+			</table>
+		</div>
+					
+
+			<div ng-if="tiendavisible">
+       		<table class="tblsize mdl-data-table mdl-js-data-table mdl-data-table--sectable mdl-shadow--2dp">
+				<caption > <h5>Tiendas <span class="badge">Total: {{otrastiendas.length}}</span></h5></caption>
+					<thead>
+						<tr>
+							
+							<th class="tbnombre mdl-data-table__cell--non-numeric"><div class="icon material-icons">store</div> Nombre</th>
+							<th class="tbdescripcion mdl-data-table__cell--non-numeric">Dirección</th>
+							<th class="tbprecio mdl-data-table__cell--non-numeric">Ciudad</th>
+							<th class="tbprecio mdl-data-table__cell--non-numeric">CP</th>
+							<th class="tbtienda">Teléfono</th>
+							<th class="tbdescripcion mdl-data-table__cell--non-numeric">Email</th>
+							<th class="tbtienda">Fax</th>	
+							<th class="tbboton mdl-data-table__cell--non-numeric">
+								<button class="btnplus mdl-button mdl-js-button mdl-button--icon" ng-click="anadirtienda()"><i class="material-icons">add</i>
+								</button>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+							
+						<tr ng-repeat="tienda in otrastiendas">
+										
+							
+							<td class="tbnombre mdl-data-table__cell--non-numeric">{{tienda.nombre}}</td>
+							<td class="tbdescripcion mdl-data-table__cell--non-numeric">{{tienda.direccion}}</td>
+							<td class="tbprecio mdl-data-table__cell--non-numeric">{{tienda.ciudad}}</td>
+							<td class="tbprecio mdl-data-table__cell--non-numeric">{{tienda.codigo_postal}}</td>
+							<td class="tbtienda mdl-data-table__cell--non-numeric">{{tienda.telefono}}</td>
+							<td class="tbdescripcion mdl-data-table__cell--non-numeric">{{tienda.email}}</td>
+							<td class="tbtienda mdl-data-table__cell--non-numeric">{{tienda.fax}}</td>
+						
+							<td class="tbboton mdl-data-table__cell--non-numeric">
+
+								<button ng-click="modificatienda()" class="btneditar mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">search</i>
+								</button>
+								<!-- <button ng-click="borrar()"  class="btnborrar mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">close</i>
+								</button> -->
+							</td>
+						</tr>
+					</tbody>	
+			</table>
+		</div>
+
+
+						<div  ng-if="perfilvisible" class="editarmiperfi">
+							<h4><i class="material-icons">edit</i> Editar Perfil</h4>
+ 							<form  class="">
+							  <div class="mdl-grid">
+							  	<div class="mdl-cell mdl-cell--3-col" >
+							     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+							     		<label for=""><i class="material-icons">face</i> Nombre</label>
+								        <input ng-model="perfil.nombre" class="mdl-textfield__input" pattern="[A-Z,a-z, ]*" type="text" >
+								        <label class="mdl-textfield__label" for="Name"></label>
+									    <span class="mdl-textfield__error">Sólo letras</span>
+								 </div>
+								 </div>
+
+								 <div class="mdl-cell mdl-cell--4-col" >
+								 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								        <label for=""><i class="material-icons">portrait</i> Primer Apellido</label>
+								        <input ng-model="perfil.apellido1" class="mdl-textfield__input" pattern="[A-Z,a-z, ]*" type="text" >
+								        <label class="mdl-textfield__label" for=""></label>
+									    <span class="mdl-textfield__error">Sólo letras</span>
+								</div>
+								</div>
+
+								<div class="mdl-cell mdl-cell--4-col" >
+								 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								 		<label for=""><i class="material-icons">portrait</i> Segundo Apellido</label>
+								        <input ng-model="perfil.apellido2" class="mdl-textfield__input" pattern="[A-Z,a-z, ]*" type="text" >
+								        <label class="mdl-textfield__label" for="Name"></label>
+									    <span class="mdl-textfield__error">Sólo letras</span>
+								</div>
+								</div>
+
+								
+								 <div class="mdl-cell mdl-cell--4-col" >
+								 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								        <label for=""><i class="material-icons">payment</i> NIF</label>
+								        <input ng-model="perfil.NIF" class="mdl-textfield__input" type="text" >
+								        <label class="mdl-textfield__label" for=""></label>
+									   
+								</div>
+								</div>
+
+								<div class="mdl-cell mdl-cell--8-col" >
+								 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								 	<label for=""><i class="material-icons">location_on</i> Dirección</label>
+								    <input ng-model="perfil.direccion" class="mdl-textfield__input"  >
+								    <label class="mdl-textfield__label" for="sample4"></label>
+								 </div>
+								</div>
+
+								<div class="mdl-cell mdl-cell--4-col" >
+								 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								 	<label for=""><i class="material-icons">location_on</i> Localidad</label>
+								    <input ng-model="perfil.localidad" class="mdl-textfield__input"  >
+								    <label class="mdl-textfield__label" for="sample4"></label>
+								 </div>
+								</div>
+
+								<div class="mdl-cell mdl-cell--4-col" >
+								 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								 	<label for=""><i class="material-icons">location_on</i> Provincia</label>
+								    <input ng-model="perfil.provincia" class="mdl-textfield__input" >
+								    <label class="mdl-textfield__label" for="sample4"></label>
+								 </div>
+								</div>
+
+								<div class="mdl-cell mdl-cell--4-col" >
+								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+									 <label for=""><i class="material-icons">phone</i> Teléfono</label>
+								    <input ng-model="perfil.telefono" class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" >
+								    <label class="mdl-textfield__label" for="sample4"></label>
+								    <span class="mdl-textfield__error">No es un número</span>
+								 </div>
+								</div>
+								<div class="mdl-cell mdl-cell--4-col" >
+								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+									<label for=""><i class="material-icons">mail</i> Email</label>
+								    <input ng-model="perfil.email" class="mdl-textfield__input" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+								    <label class="mdl-textfield__label" for="sample4"></label>
+								    <span class="mdl-textfield__error">No es un email válido</span>
+								 </div>
+								</div>
+
+								<div class="mdl-cell mdl-cell--4-col" >
+								  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								  			<label for=""><i class="material-icons">security</i> Password</label>
+
+								 		     <input ng-model="perfil.password" class="mdl-textfield__input" type="password">
+										      <label class="mdl-textfield__label" for="Email"></label>
+								 </div>
+								</div>
+							 </div>
+							 </form>
+				    
+				    <div class="mdl-dialog__actions">
+				       <button ng-click="cambiarPerfil()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">
+						Modificar
+						</button>
+				    </div>
+
+				</div>
+
+
+				<div ng-if="productousuvisible">
+			 	    <div class="fechaeventgest mdl-grid mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-card mdl-shadow--4dp">
+                                <div class="fechabu mdl-cell mdl-cell--12-col">
+                                    <h2 class="mdl-card__title-text ">Buscar por fecha:</h2>
+                                 </div>
+								        <div class="mdl-cell mdl-cell--4-col-tablet mdl-cell--4-col">
+
+                                    <div class="mdl-card__supporting-text">
+                                    	<p><i class="material-icons">date_range</i>Desde </p>
+    					 							
+							    				<input data-date-format="dd/mm/yyyy" class="mdl-textfield__input" id="fecha1p" placeholder="dd/mm/aaa" type="date">				   
+                                    </div>
+                                     
+                                </div>
+
+                                <div class="mdl-cell mdl-cell--4-col-tablet mdl-cell--4-col">
+
+                                    <div class="mdl-card__supporting-text">
+                                    	<p><i class="material-icons">date_range</i>Hasta</p>
+                                    						 							  					
+							    	<input data-date-format="dd/mm/yyyy" class="mdl-textfield__input" id="fecha2p"  type="date">			   
+                                    </div>
+                                     
+                                </div>
+                                <div class="mdl-cell mdl-cell--12-col-tablet mdl-cell--4-col">
+
+                                    <div class="mdl-card__supporting-text mdl-typography--text-center"><br>
+                                    	<button ng-click="buscarxFechaprodu()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+  										                Buscar
+									                   </button>
+                                    </div>
+                                     
+                                </div>
+            				</div>
+			
+
+			<table class="tblevento mdl-data-table mdl-js-data-table mdl-data-table--sectable mdl-shadow--2dp">
+				<caption > <h5>Lista de productos reservados <span class="badge">Total: {{listaproducto.length}}</span></h5></caption>
+					<thead>
+						<tr>
+							<th class="tbimagen">Reserva</th>
+							<th class="tbnombre">ID usuario</th>
+							<th class="tbnombre mdl-data-table__cell--non-numeric">Nombre</th>
+							<th class="tbdescripcion mdl-data-table__cell--non-numeric">Primer Apellido</th>
+							<th class="tbprecio mdl-data-table__cell--non-numeric">Segundo Apellido</th>
+							<th class="tbentradas mdl-data-table__cell--non-numeric">NIF</th>
+							<th class="tbtienda mdl-data-table__cell--non-numeric">Producto</th>
+							<th class="tbtienda">Cantidad</th>
+							<th class="tbtienda">Precio</th>
+							<th class="tbtienda mdl-data-table__cell--non-numeric">Fecha</th>
+						</tr>
+					</thead>
+					<tbody>
+							
+						<tr ng-repeat="listapr in listaproducto">
+										
+							<td class="tbnombre mdl-data-table__cell--non-numeric">{{listapr.id_reserva}}</td>
+							<td class="tbnombre mdl-data-table__cell--non-numeric">{{listapr.id_usuario}}</td>
+							<td class="tbnombre mdl-data-table__cell--non-numeric">{{listapr.nombre}}</td>
+							<td class="tbnombre mdl-data-table__cell--non-numeric">{{listapr.apellido1}}</td>
+							<td class="tbnombre mdl-data-table__cell--non-numeric">{{listapr.apellido2}}</td>
+							<td class="tbnombre mdl-data-table__cell--non-numeric">{{listapr.NIF}}</td>
+							<td class="tbnombre mdl-data-table__cell--non-numeric">{{listapr.producto}}</td>
+							<td class="tbnombre mdl-data-table__cell--non-numeric">{{listapr.cantidad}}</td>
+							<td class="tbnombre mdl-data-table__cell--non-numeric">{{listapr.precio_total | euros: '€'}}</td>
+							<td class="tbtienda mdl-data-table__cell--non-numeric">{{listapr.fecha | vfecha}}</td>
+						
+						</tr>
+					</tbody>	
+			</table>
+		</div>
+
+			<div ng-if="eventousuvisible">
+			 	 <div class="fechaeventgest mdl-grid mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-card mdl-shadow--4dp">
+                                <div class="fechabu mdl-cell mdl-cell--12-col">
+                                    <h2 class="mdl-card__title-text ">Buscar por fecha:</h2>
+                                 </div>
+								        <div class="mdl-cell mdl-cell--4-col-tablet mdl-cell--4-col">
+
+                                    <div class="mdl-card__supporting-text">
+                                    	<p><i class="material-icons">date_range</i>Desde </p>
+    					 							
+							    				<input data-date-format="dd/mm/yyyy" class="mdl-textfield__input" id="fecha1e"  placeholder="dd/mm/aaa" type="date">				   
+                                    </div>                       
+                                </div>
+
+                                <div class="mdl-cell mdl-cell--4-col-tablet mdl-cell--4-col">
+
+                                    <div class="mdl-card__supporting-text">
+                                    	<p><i class="material-icons">date_range</i>Hasta</p>
+                                    						 							  					
+							    	<input data-date-format="dd/mm/yyyy" class="mdl-textfield__input" id="fecha2e" type="date">			   
+                                    </div>
+                                     
+                                </div>
+                                <div class="mdl-cell mdl-cell--12-col-tablet mdl-cell--4-col">
+
+                                    <div class="mdl-card__supporting-text mdl-typography--text-center"><br>
+                                    	<button ng-click="buscarxFechaevent()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+  										                Buscar
+									                   </button>
+                                    </div>
+                                     
+                                </div>
+            				</div>
+			
+
+			<table class="tblevento mdl-data-table mdl-js-data-table mdl-data-table--sectable mdl-shadow--2dp">
+				<caption > <h5>Lista de eventos reservados <span class="badge">Total: {{listaevento.length}}</span></h5></caption>
+					<thead>
+						<tr>
+							<th class="tbimagen">Reserva</th>
+							<th class="tbnombre">ID usuario</th>
+							<th class="tbnombre mdl-data-table__cell--non-numeric">Nombre</th>
+							<th class="tbdescripcion mdl-data-table__cell--non-numeric">Primer Apellido</th>
+							<th class="tbprecio mdl-data-table__cell--non-numeric">Segundo Apellido</th>
+							<th class="tbentradas mdl-data-table__cell--non-numeric">NIF</th>
+							<th class="tbtienda mdl-data-table__cell--non-numeric">Evento</th>
+							<th class="tbtienda">Cantidad</th>
+							<th class="tbtienda">Precio</th>
+							<th class="tbtienda mdl-data-table__cell--non-numeric">Fecha</th>
+						</tr>
+					</thead>
+					<tbody>
+							
+						<tr ng-repeat="listaev in listaevento">
+										
+							<td class="tbnombre mdl-data-table__cell--non-numeric">{{listaev.id_reserva}}</td>
+							<td class="tbnombre mdl-data-table__cell--non-numeric">{{listaev.id_usuario}}</td>
+							<td class="tbnombre mdl-data-table__cell--non-numeric">{{listaev.nombre}}</td>
+							<td class="tbtienda mdl-data-table__cell--non-numeric">{{listaev.apellido1}}</td>
+							<td class="tbnombre mdl-data-table__cell--non-numeric">{{listaev.apellido2}}</td>
+							<td class="tbnombre mdl-data-table__cell--non-numeric">{{listaev.NIF}}</td>
+							<td class="tbnombre mdl-data-table__cell--non-numeric">{{listaev.evento}}</td>
+							<td class="tbnombre mdl-data-table__cell--non-numeric">{{listaev.cantidad}}</td>
+							<td class="tbnombre mdl-data-table__cell--non-numeric">{{listaev.precio_total | euros: '€'}}</td>
+							<td class="tbtienda mdl-data-table__cell--non-numeric">{{listaev.fecha | vfecha}}</td>		
+						</tr>
+					</tbody>	
+			</table>
+		</div>
+
+      </main>
+    </div>
+</div>
+
+						<!-- modal de tabla productos-->
+						 	<dialog id="mRef" class="mRef mdl-dialog">
+						  	 	
+							<div class="tarjeta mdl-card mdl-shadow--2dp">
+								<div class="{{modal.bcolor}} mdl-card__actions mdl-card--border">
+		    						<button type="button" class="mdl-button close"><i class="material-icons">close</i>
+									</button>
+									<p class="mdl-dialog__title"><i class="material-icons">folder_open</i>{{modal.opcion}} producto: {{modal.datos.nombre}}</p>
+									<p class="fecha text-right"><i class="material-icons">date_range</i> {{modal.fecha}}</p>
+ 							 	</div>
+						  	 	<div class="mdl-progress  mdl-progress__indeterminate"></div>
+								<div class="{{modal.bcolor}} mdl-card__title mdl-card--expand">
+
+						   			<p id="tit" ng-model="modal.datos.nombre" class="mdl-typography--text-center">{{modal.datos.descripcion}}</p>
+
+						  		</div>
+								<div class="mdl-card__supporting-text">
+
+						    	<div class="mdl-dialog__content">
+						 								              
+									<form action="dialog" class="">
+							 			<div class="mdl-grid">
+							 				
+								  			<div class="mdl-cell mdl-cell--1-col" >
+											    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+											    	<label for="id">ID</label>
+										        	<input disabled class="mdl-textfield__input" class="form-control" type="text" ng-model="modal.datos.id_producto_tienda" name="id" >
+												        <label class="mdl-textfield__label" for=""></label>
+											
+												</div>
+									 		</div>
+
+									 		<div class="mdl-cell mdl-cell--8-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										 			<label for="alta">Imágenes</label>
+										 			<div class="mdl-grid">
+
+											 			<div class="mdl-cell mdl-cell--4-col" ng-repeat="ima in modal.datos.imagen">
+											 				<img class="imagenmodal" ng-src="{{ima.ruta}}" alt="">
+											 				<input ng-disabled="modal.acti" class="mdl-textfield__input" class="form-control" type="text" ng-model="ima.ruta" name="id" >
+											 			</div>
+											 			<div ng-if="modal.image">
+											 				<input class="mdl-textfield__input" class="form-control" type="text" ng-model="ima.ruta" >
+											 			</div>
+										 			</div>
+												  
+												    <label class="mdl-textfield__label" for=""></label>
+												</div>
+											</div>			
+											
+											<div class="mdl-cell mdl-cell--2-col" >
+
+
+				 								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+													<label for="tienda">Tienda</label>
+													 <select ng-disabled="modal.acti" ng-model="mitienda" ng-options="otra.nombre for otra in otrastiendas track by otra.id">
+													 	<option value="">-Elige tienda-</option>											  		
+													</select> 
+													<!-- <div>{{mitienda}}</div> -->
+																    
+												</div>
+											</div>
+
+											<div class="mdl-cell mdl-cell--3-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+												    <label for="ref">Nombre</label>
+												    <input ng-disabled="modal.acti"  class="mdl-textfield__input" id="ref" class="form-control" ng-model="modal.datos.nombre" type="text"  name="ref">
+										        	<label class="mdl-textfield__label" for=""></label>
+												</div>
+											</div>
+				
+											<div class="mdl-cell mdl-cell--6-col" >
+												<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+													<label for="descripcion">Descripción</label>
+												    <input ng-disabled="modal.acti"  class="mdl-textfield__input" id="descripcion" ng-model="modal.datos.descripcion" type="text"  name="des">
+												    <label class="mdl-textfield__label" for=""></label>
+												 </div>
+											</div>
+											
+											<div class="mdl-cell mdl-cell--3-col" >
+												<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+													<label for="categoria">Categoría</label>
+												     <select ng-disabled="modal.acti" ng-model="micategoria" ng-options="catego.nombre for catego in categorias track by catego.id">
+													 	<option value="">-Elige categoría-</option>											  		
+													</select> 
+													<!-- <div>{{categoriaElegida}}</div> -->
+												 </div>
+											</div>
+									
+											<div class="mdl-cell mdl-cell--2-col" >
+												<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+													<label for="precio">Precio</label>
+												    <input ng-disabled="modal.acti" class="mdl-textfield__input" id="precio" class="form-control" type="text" ng-model="modal.datos.precio" name="pre" pattern="-?[0-9]*(\.[0-9]+)?">
+												    <label class="mdl-textfield__label" for=""></label>
+												</div>
+											</div>
+
+											<div class="mdl-cell mdl-cell--2-col" >
+												<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+													<label for="stock">Stock</label>
+												    <input ng-disabled="modal.acti" class="mdl-textfield__input" id="stock" class="form-control" type="text" ng-model="modal.datos.stock" name="sto" pattern="-?[0-9]*(\.[0-9]+)?">
+												    <label class="mdl-textfield__label" for=""></label>
+												    <span class="mdl-textfield__error">No es un número válido</span>
+
+												</div>
+											</div>
+
+											
+
+											<div class="mdl-cell mdl-cell--4-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										 			<label for="alta">Fin de campaña</label>
+												    <input ng-disabled="modal.acti" class="mdl-textfield__input"  id="fecha_campania" class="form-control" type="date" ng-model="modal.datos.fecha_fin_campania" name="fecha_campania" data-date-format="dd/mm/yyyy">
+												    <label class="mdl-textfield__label" for=""></label>
+												</div>
+											</div>
+
+
+
+											<div class="mdl-cell mdl-cell--4-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										 			<label for="alta">Estado</label>
+												    <select ng-disabled="modal.acti" ng-model="modal.datos.estado[0]" ng-options="estado.nombre for estado in estados track by estado.id">
+													 	<option value="">Propuesto</option>		
+													</select> 
+												
+												</div>
+											</div>
+
+										</div>
+									</form>
+						    	</div>
+						   		<div class="mdl-dialog__actions">
+						    		<button ng-click="generar()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored {{modal.bcolor}}" type="submit">
+						    			{{modal.boton}}
+									</button>
+						  		</div>
+						 		</div>
+							</div>
+
+						 	</dialog>
+
+							
+						<!-- modal de tabla eventos-->
+						<dialog id="mRefeve" class="mRefeve mdl-dialog">
+						  	 	
+							<div class="tarjetaeve mdl-card mdl-shadow--2dp">
+								<div class="{{modaleve.bcolor}} mdl-card__actions mdl-card--border">
+		    						<button type="button" class="mdl-button close"><i class="material-icons">close</i>
+									</button>
+									<p class="mdl-dialog__title"><i class="material-icons">folder_open</i>{{modaleve.opcion}} evento:</p>
+									<p class="fecha text-right"><i class="material-icons">date_range</i> {{modaleve.fecha}}</p>
+ 							 	</div>
+						  	 	<div class="mdl-progress  mdl-progress__indeterminate"></div>
+								<div class="{{modaleve.bcolor}} mdl-card__title mdl-card--expand">
+
+						   			<p ng-model="modaleve.datos.descripcion" class="mdl-typography--text-center"></p>
+
+						  		</div>
+								<div class="mdl-card__supporting-text">
+
+						    	<div class="mdl-dialog__content">
+						 								              
+									<form action="dialog" class="">
+							 			<div class="mdl-grid">
+							 				
+								  			<!-- <div class="mdl-cell mdl-cell--1-col" >
+											    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+											    	<label for="id">ID</label>
+										        	<input disabled class="mdl-textfield__input" id="id" class="form-control" type="text" ng-model="modaleve.datoseve.id_producto_tienda" name="id" >
+												        <label class="mdl-textfield__label" for=""></label>
+											
+												</div>
+									 		</div> -->
+
+									 		<div class="mdl-cell mdl-cell--8-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										 			<label for="">Imagen</label>
+										 			<div class="mdl-grid">
+
+											 			<div class="mdl-cell mdl-cell--4-col" >
+											 				<img class="imagenmodal" ng-src="{{modaleve.eve.imagen}}" alt="">
+											 				<input class="mdl-textfield__input" class="form-control" type="text" ng-model="modaleve.datos.imagen" name="" >
+											 			</div>
+										 			</div>
+												  
+												    <label class="mdl-textfield__label" for=""></label>
+												</div>
+											</div>			
+									
+
+											<div class="mdl-cell mdl-cell--4-col" >
+													
+												<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+												    <label for="ref">Nombre</label>
+												    <input class="mdl-textfield__input"  class="form-control" ng-model="modaleve.datos.nombre" type="text"  name="">
+										        	<label class="mdl-textfield__label" for=""></label>
+												</div>
+
+
+											</div>
+				
+											<div class="mdl-cell mdl-cell--6-col" >
+												<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+													<label for="descripcion">Descripción</label>
+												    <input class="mdl-textfield__input"  ng-model="modaleve.datos.descripcion" type="text"  name="">
+												    <label class="mdl-textfield__label" for=""></label>
+												 </div>
+											</div>
+										
+										
+										</div>
+									</form>
+						    	</div>
+						   		<div class="mdl-dialog__actions">
+						    		<button ng-click="generarevenuevo()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored {{modaleve.bcolor}}" type="submit">
+						    			{{modaleve.boton}}
+									</button>
+						  		</div>
+						 		</div>
+								</div>
+
+						 </dialog>
+
+
+
+
+						 	<!-- modal de tabla eventos lugar-->
+						 	<dialog id="mRefevelug" class="mRefevelug mdl-dialog">
+						  	 	
+							<div class="tarjetaeve mdl-card mdl-shadow--2dp">
+								<div class="{{modalevelug.bcolor}} mdl-card__actions mdl-card--border">
+		    						<button type="button" class="mdl-button close"><i class="material-icons">close</i>
+									</button>
+									<p class="mdl-dialog__title"><i class="material-icons">folder_open</i>{{modalevelug.opcion}} datos de evento:</p>
+									<p class="fecha text-right"><i class="material-icons">date_range</i> {{modalevelug.fecha}}</p>
+ 							 	</div>
+						  	 	<div class="mdl-progress  mdl-progress__indeterminate"></div>
+								<div class="{{modalevelug.bcolor}} mdl-card__title mdl-card--expand">
+
+						   			<p  ng-model="modalevelug.datos.descripcion" class="mdl-typography--text-center"></p>
+
+						  		</div>
+								<div class="mdl-card__supporting-text">
+
+						    	<div class="mdl-dialog__content">
+						 								              
+									<form action="dialog" class="">
+							 			<div class="mdl-grid">
+
+
+											<div class="mdl-cell mdl-cell--6-col" >
+
+												<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+													<label for="">Evento</label>
+													 <select ng-model="modalevelug.datos.nombre" ng-options="evento.nombre for evento in events track by evento.id">
+													 	<option value="">-Elige evento-</option>											  		
+													</select> 
+													<!-- <div>{{modalevelug.datos.nombre}}</div> -->
+																    
+												</div>
+										 		
+											</div>
+				
+
+										<div class="mdl-cell mdl-cell--3-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+												    <label for="ref">Aforo</label>
+												    <input class="mdl-textfield__input"  class="form-control" ng-model="modalevelug.datos.aforo" type="text"  name="">
+										        	<label class="mdl-textfield__label" for=""></label>
+												</div>
+										</div>
+										
+										<div class="mdl-cell mdl-cell--3-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+												    <label for="ref">Precio</label>
+												    <input class="mdl-textfield__input"  class="form-control" ng-model="modalevelug.datos.precio" type="text"  name="">
+										        	<label class="mdl-textfield__label" for=""></label>
+												</div>
+										</div>
+
+										<div class="mdl-cell mdl-cell--6-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+													<label for="">Lugar</label>
+													 <select ng-model="modalevelug.datos.lugar" ng-options="luga.lugar for luga in lugares track by luga.id">
+													 	<option value="">-Elige lugar-</option>											  		
+													</select> 
+												<!-- 	<div>{{modalevelug.datos.lugar}}</div>  -->
+																    
+												</div>
+										</div>
+
+										<div class="mdl-cell mdl-cell--5-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+												    <label for="ref">Nº de Entradas</label>
+												    <input class="mdl-textfield__input"  class="form-control" ng-model="modalevelug.datos.entradas_disponibles" type="text"  name="">
+										        	<label class="mdl-textfield__label" for=""></label>
+												</div>
+										</div>
+										
+										<div class="mdl-cell mdl-cell--7-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										 			<label for="alta">Fecha posible</label>
+												    <input class="mdl-textfield__input"  class="form-control" type="date" ng-model="fechaposible" placeholder="dd/mm/aaa" name="">
+												    <label class="mdl-textfield__label" for=""></label>
+												</div>
+										</div>
+
+										</div>
+									</form>
+						    	</div>
+						   		<div class="mdl-dialog__actions">
+						    		<button ng-click="generaevelug()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored {{modalevelug.bcolor}}" type="submit">
+						    			{{modalevelug.boton}}
+									</button>
+						  		</div>
+						 		</div>
+							</div>
+
+						 	</dialog>
+
+
+				<!-- 		modal de cambio de datos evento -->
+						 	<dialog id="mRefevemodi" class="mRef mdl-dialog">
+						  	 	
+							<div class="tarjetamodi mdl-card mdl-shadow--2dp">
+								<div class="{{modaleveedit.bcolor}} mdl-card__actions mdl-card--border">
+		    						<button type="button" class="mdl-button close"><i class="material-icons">close</i>
+									</button>
+									<p class="mdl-dialog__title"><i class="material-icons">folder_open</i>{{modaleveedit.opcion}} evento: {{modaleveedit.datos.nombre}}</p>
+									<p class="fecha text-right"><i class="material-icons">date_range</i> {{modaleveedit.fecha}}</p>
+ 							 	</div>
+						  	 	<div class="mdl-progress  mdl-progress__indeterminate"></div>
+								<div class="{{modaleveedit.bcolor}} mdl-card__title mdl-card--expand">
+
+						   			<p  ng-model="modalevelug.datosevelug.descripcion" class="mdl-typography--text-center">{{modaleveedit.datos.descripcion}}</p>
+
+						  		</div>
+								<div class="mdl-card__supporting-text">
+
+						    	<div class="mdl-dialog__content">
+						 								              
+									<form action="dialog" class="">
+							 			<div class="mdl-grid">
+
+											<div class="mdl-cell mdl-cell--2-col" >
+											    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+											    	<label for="id">ID</label>
+										        	<input disabled class="mdl-textfield__input" class="form-control" type="text" ng-model="modaleveedit.datos.id_evento_lugar" name="id" >
+												        <label class="mdl-textfield__label" for=""></label>
+											
+												</div>
+									 		</div>
+
+											<div class="mdl-cell mdl-cell--6-col" >
+
+												<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+													<label for="">Evento</label>
+													 <select ng-model="listanombre" ng-options="evento.nombre for evento in events track by evento.id">
+													 	<option value="">-Elige evento-</option>											  		
+													</select> 
+												<!-- 	<div>{{modaleveedit.datos}}</div> -->
+																    
+												</div>
+											</div>
+				
+
+										<div class="mdl-cell mdl-cell--3-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+												    <label for="ref">Aforo</label>
+												    <input class="mdl-textfield__input"  class="form-control" ng-model="modaleveedit.datos.aforo" type="text"  name="">
+										        	<label class="mdl-textfield__label" for=""></label>
+												</div>
+										</div>
+										
+										<div class="mdl-cell mdl-cell--3-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+												    <label for="ref">Precio</label>
+												    <input class="mdl-textfield__input"  class="form-control" ng-model="modaleveedit.datos.precio" type="text"  name="">
+										        	<label class="mdl-textfield__label" for=""></label>
+												</div>
+										</div>
+
+										<div class="mdl-cell mdl-cell--6-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+													<label for="">Lugar</label>
+													 <select ng-model="listalugar" ng-options="luga.lugar for luga in lugares track by luga.id">
+													 	<option value="">-Elige lugar-</option>											  		
+													</select> 
+													<!-- <span>{{listalugar}}</span> -->
+																    
+												</div>
+										</div>
+
+										<div class="mdl-cell mdl-cell--5-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+												    <label for="ref">Nº de Entradas</label>
+												    <input class="mdl-textfield__input"  class="form-control" ng-model="modaleveedit.datos.entradas_disponibles" type="text"  name="">
+										        	<label class="mdl-textfield__label" for=""></label>
+												</div>
+										</div>
+										<div class="mdl-cell mdl-cell--7-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+												    <label for="ref">Descripcion</label>
+												    <input class="mdl-textfield__input"  class="form-control" ng-model="modaleveedit.datos.descripcion" type="text"  name="">
+										        	<label class="mdl-textfield__label" for=""></label>
+												</div>
+										</div>
+										
+										<div class="mdl-cell mdl-cell--7-col" >
+										 		<div ng-show ="modaleveedit.datos.fecha == null" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										 			<label for="alta">Fecha posible</label>
+												    <input class="mdl-textfield__input" class="form-control" type="date" ng-model="fechaposible" name="" >
+												    <label class="mdl-textfield__label" for=""></label>
+												</div>
+										</div>
+
+										</div>
+									</form>
+						    	</div>
+						   		<div class="mdl-dialog__actions">
+						    		<button ng-click="generaeve()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored {{modaleveedit.bcolor}}" type="submit">
+						    			{{modaleveedit.boton}}
+									</button>
+						  		</div>
+						 		</div>
+							</div>
+
+						 	</dialog>
+
+
+
+						 		<dialog id="mRefparti" class="mRefparti mdl-dialog">
+						  	 	
+								<div class="tarjetaparti mdl-card mdl-shadow--2dp">
+								<div class="{{modalparti.bcolor}} mdl-card__actions mdl-card--border">
+		    						<button type="button" class="mdl-button close"><i class="material-icons">close</i>
+									</button>
+									<p class="mdl-dialog__title"><i class="material-icons">folder_open</i>{{modalparti.opcion}} participante:
+									<p class="fecha text-right"><i class="material-icons">date_range</i> {{modalparti.fecha}}</p>
+ 							 	</div>
+						  	 	<div class="mdl-progress  mdl-progress__indeterminate"></div>
+								<div class="{{modalparti.bcolor}} mdl-card__title mdl-card--expand">
+
+						   			<p  ng-model="modalparti.datosparti.descripcion" class="mdl-typography--text-center">{{modalparti.datos.nombre}}</p>
+
+						  		</div>
+								<div class="mdl-card__supporting-text">
+
+						    	<div class="mdl-dialog__content">
+						 								              
+									<form class="">
+
+							 		  <div class="mdl-grid">
+									
+										<div class="mdl-cell mdl-cell--12-col" >
+											
+											<!-- <div  ng_repeat="participante in losElegidos">
+												<input type="checkbox" ng-model="nuevoparti" ng-checked ="losSelecionados(participante)" ng-click ="seleccionparti(participante)">{{participante.nombre}} {{participante.apellido1}} {{participante.apellido2}}
+														{{losEvent}}
+											</div> -->
+											
+													
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+												  <!--   <label for="ref">Participantes {{modalparti.tipo}}</label> -->
+												    <table class="tbtparti mdl-data-table mdl-js-data-table mdl-data-table--sectable mdl-shadow--2dp">
+												    	<tr>
+												    		<th class="tbparti mdl-data-table__cell--non-numeric">Participantes {{modalparti.tipo}}</th>
+												    		
+												    		<th class="mdl-data-table__cell--non-numeric">
+
+															<div id="tparti" class="icon material-icons">{{modalparti.icono}}</div>
+															<div class="mdl-tooltip mdl-tooltip--large" for="tparti">
+															{{modalparti.opcion}} participante
+															</div>
+												    		</th>
+												    	</tr>
+														<tr class="tdparti" ng_repeat="participante in losElegidos">
+															<td class="tbparti mdl-data-table__cell--non-numeric">
+															{{participante.nombre}} {{participante.apellido1}} {{participante.apellido2}}</td>	
+															<td class="mdl-data-table__cell--non-numeric"><input type="checkbox" ng-model="nuevoparti" ng-checked ="losSelecionados(participante)" ng-click ="seleccionparti(participante)"></td>
+														</tr>
+												    </table>
+												    <div ng-repeat="parti in nuevoparti"><span>{{parti}}</span></div>
+												</div>
+										</div>
+										
+									  </div>
+									</form>
+						    	</div>
+						   		<div class="mdl-dialog__actions">
+						    		<button ng-click="generarParticipante()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored {{modalparti.bcolor}}" type="submit">
+						    			{{modalparti.boton}}
+									</button>
+						  		</div>
+						 		</div>
+							</div>
+
+						 	</dialog>
+
+
+						<dialog id="mReffecha" class="mRefparti mdl-dialog">
+						  	 	
+								<div class="tarjetaparti mdl-card mdl-shadow--2dp">
+								<div class="{{modalparti.bcolor}} mdl-card__actions mdl-card--border">
+		    						<button type="button" class="mdl-button close"><i class="material-icons">close</i>
+									</button>
+									<p class="mdl-dialog__title"><i class="material-icons">folder_open</i>{{modalparti.opcion}} fecha definitiva: {{modalparti.datosparti.referencia}}</p><br>
+									<p class="fecha text-right"><i class="material-icons">date_range</i> {{modalparti.fecha}}</p>
+ 							 	</div>
+						  	 	<div class="mdl-progress  mdl-progress__indeterminate"></div>
+								<div class="{{modalparti.bcolor}} mdl-card__title mdl-card--expand">
+
+						   			
+
+						  		</div>
+								<div class="mdl-card__supporting-text">
+
+						    	<div class="mdl-dialog__content">
+						 								              
+									<form class="">
+
+							 		  <div class="mdl-grid">
+									
+										<div class="mdl-cell mdl-cell--12-col" >
+											
+
+													
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+											
+												      <table class="tbtfecha mdl-data-table mdl-js-data-table mdl-data-table--sectable mdl-shadow--2dp">
+												    	<tr>
+												    		<th class="tbfecha mdl-data-table__cell--non-numeric">Fechas a elegir</th>
+												    	</tr>
+														<tr class="tdparti" ng-repeat="fecha in modalparti.datos.fechas_posibles">
+															<td class="tbfecha"><input type="radio" name ="fechafija" ng-model="modalparti.datos.fecha"  ng-value="fecha"> {{fecha.fecha}}
+															</td>	
+													
+														</tr>
+												    </table>
+												   
+												</div>
+										</div>
+										
+									  </div>
+									</form>
+						    	</div>
+						   		<div class="mdl-dialog__actions">
+						    		<button ng-click="fechaelegida()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored {{modalparti.bcolor}}" type="submit">
+						    			{{modalparti.boton}}
+									</button>
+						  		</div>
+						 		</div>
+							</div>
+
+						 	</dialog>
+
+
+
+
+						
+ 				<dialog id="mReftienda" class="mReftienda mdl-dialog">
+						  	 	
+							<div class="tarjetatienda mdl-card mdl-shadow--2dp">
+								<div class="{{modalt.bcolor}} mdl-card__actions mdl-card--border">
+		    						<button type="button" class="mdl-button close"><i class="material-icons">close</i>
+									</button>
+									<p class="mdl-dialog__title"><i class="material-icons">folder_open</i>{{modalt.opcion}} Tienda {{modalt.datos.nombre}}</p>
+									<p class="fecha text-right"><i class="material-icons">date_range</i> {{modalt.fecha}}</p>
+ 							 	</div>
+						  	 	<div class="mdl-progress  mdl-progress__indeterminate"></div>
+								<div class="{{modalt.bcolor}} mdl-card__title mdl-card--expand">
+
+
+						  		</div>
+								<div class="mdl-card__supporting-text">
+
+						    	<div class="mdl-dialog__content">
+						 								              
+									<form action="dialog" class="">
+							 			<div class="mdl-grid">
+
+											<div class="mdl-cell mdl-cell--2-col" >
+											    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+											    	<label for="id">ID</label>
+										        	<input disabled class="mdl-textfield__input" class="form-control" type="text" ng-model="modalt.datos.id" >
+												        <label class="mdl-textfield__label" for=""></label>
+											
+												</div>
+									 		</div>
+
+											<div class="mdl-cell mdl-cell--6-col" >
+											    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+											    	<label for="id">Nombre</label>
+										        	<input class="mdl-textfield__input"  class="form-control" type="text" ng-model="modalt.datos.nombre"  >
+												        <label class="mdl-textfield__label" for=""></label>
+											
+												</div>
+									 		</div>
+				
+											<div class="mdl-cell mdl-cell--4-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+													<label for="">Teléfono</label>
+												    <input class="mdl-textfield__input"  class="form-control" type="text" ng-model="modalt.datos.telefono">
+												    <label class="mdl-textfield__label" for="telefono"></label>
+												    <span class="mdl-textfield__error">No es un número válido</span>
+												
+												</div>
+										</div>
+									
+										<div class="mdl-cell mdl-cell--12-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+												    <label for="">Dirección</label>
+												    <input class="mdl-textfield__input"  class="form-control" ng-model="modalt.datos.direccion" type="text"  name="">
+										        	<label class="mdl-textfield__label" for=""></label>
+												</div>
+										</div>
+										
+										<div class="mdl-cell mdl-cell--3-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+													<label for="">CP</label>
+												    <input class="mdl-textfield__input"  class="form-control" type="text" ng-model="modalt.datos.codigo_postal" >
+												    <label class="mdl-textfield__label" for=""></label>
+												    <span class="mdl-textfield__error">No es un número válido</span>
+
+												</div>
+										</div>
+
+										<div class="mdl-cell mdl-cell--5-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+													<label for="">Ciudad</label>
+													 <input class="mdl-textfield__input"  class="form-control" ng-model="modalt.datos.ciudad" type="text"  name="">
+										        	<label class="mdl-textfield__label" for=""></label>
+																    
+												</div>
+										</div>
+										<div class="mdl-cell mdl-cell--6-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								        			<label for="">Email</label>
+								        			<input ng-model="modalt.datos.email" class="mdl-textfield__input" type="text">
+								        			<label class="mdl-textfield__label" for="email"></label>
+									      			
+									   			</div>
+										</div>
+										<div class="mdl-cell mdl-cell--4-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+													<label for="telefono">Fax</label>
+												    <input class="mdl-textfield__input"  class="form-control" type="text" ng-model="modalt.datos.fax" name="fax" pattern="-?[0-9]*(\.[0-9]+)?">
+												    <label class="mdl-textfield__label" for=""></label>
+												    <span class="mdl-textfield__error">No es un número válido</span>
+
+												</div>
+
+
+										</div>
+
+										<div class="mdl-cell mdl-cell--6-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+													<label for="">Latitud</label>
+													 <input class="mdl-textfield__input"  class="form-control" ng-model="modalt.datos.latitud" type="text"  name="">
+										        	<label class="mdl-textfield__label" for=""></label>
+																    
+												</div>
+										</div>
+										<div class="mdl-cell mdl-cell--6-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+													<label for="">Longitud</label>
+													 <input class="mdl-textfield__input"  class="form-control" ng-model="modalt.datos.longitud" type="text"  name="">
+										        	<label class="mdl-textfield__label" for=""></label>
+																    
+												</div>
+										</div>
+
+									</form>
+						    	</div>
+						   		<div class="mdl-dialog__actions">
+						    		<button ng-click="generartienda()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored {{modalt.bcolor}}" type="submit">
+						    			{{modalt.boton}}
+									</button>
+						  		</div>
+						 		</div>
+							</div>
+
+						 	</dialog>
+
+						<dialog id="mReftiend" class="mReftienda mdl-dialog">
+						  	 	
+							<div class="tarjetatienda mdl-card mdl-shadow--2dp">
+								<div class="{{modalt.bcolor}} mdl-card__actions mdl-card--border">
+		    						<button type="button" class="mdl-button close"><i class="material-icons">close</i>
+									</button>
+									<p class="mdl-dialog__title"><i class="material-icons">folder_open</i>{{modalt.opcion}} Tienda {{modalt.datos.nombre}}</p>
+									<p class="fecha text-right"><i class="material-icons">date_range</i> {{modalt.fecha}}</p>
+ 							 	</div>
+						  	 	<div class="mdl-progress  mdl-progress__indeterminate"></div>
+								<div class="{{modalt.bcolor}} mdl-card__title mdl-card--expand">
+
+
+						  		</div>
+								<div class="mdl-card__supporting-text">
+
+						    	<div class="mdl-dialog__content">
+						 								              
+									<form action="dialog" class="">
+							 			<div class="mdl-grid">
+
+											<div class="mdl-cell mdl-cell--2-col" >
+											    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+											    	<label for="id">ID</label>
+										        	<input disabled class="mdl-textfield__input" class="form-control" type="text" ng-model="modalt.datos.id" >
+												        <label class="mdl-textfield__label" for=""></label>
+											
+												</div>
+									 		</div>
+
+											<div class="mdl-cell mdl-cell--6-col" >
+											    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+											    	<label for="id">Nombre</label>
+										        	<input class="mdl-textfield__input"  class="form-control" type="text" ng-model="modalt.datos.nombre"  >
+												        <label class="mdl-textfield__label" for=""></label>
+											
+												</div>
+									 		</div>
+				
+											<div class="mdl-cell mdl-cell--4-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+													<label for="">Teléfono</label>
+												    <input class="mdl-textfield__input"  class="form-control" type="text" ng-model="modalt.datos.telefono">
+												    <label class="mdl-textfield__label" for="telefono"></label>
+												    <span class="mdl-textfield__error">No es un número válido</span>
+												
+												</div>
+										</div>
+									
+										<div class="mdl-cell mdl-cell--12-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+												    <label for="">Dirección</label>
+												    <input class="mdl-textfield__input"  class="form-control" ng-model="modalt.datos.direccion" type="text"  name="">
+										        	<label class="mdl-textfield__label" for=""></label>
+												</div>
+										</div>
+										
+										<div class="mdl-cell mdl-cell--3-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+													<label for="">CP</label>
+												    <input class="mdl-textfield__input"  class="form-control" type="text" ng-model="modalt.datos.codigo_postal" >
+												    <label class="mdl-textfield__label" for=""></label>
+												    <span class="mdl-textfield__error">No es un número válido</span>
+
+												</div>
+										</div>
+
+										<div class="mdl-cell mdl-cell--5-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+													<label for="">Ciudad</label>
+													 <input class="mdl-textfield__input"  class="form-control" ng-model="modalt.datos.ciudad" type="text"  name="">
+										        	<label class="mdl-textfield__label" for=""></label>
+																    
+												</div>
+										</div>
+										<div class="mdl-cell mdl-cell--6-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								        			<label for="">Email</label>
+								        			<input ng-model="modalt.datos.email" class="mdl-textfield__input" type="text">
+								        			<label class="mdl-textfield__label" for="email"></label>
+									      			
+									   			</div>
+										</div>
+										<div class="mdl-cell mdl-cell--4-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+													<label for="telefono">Fax</label>
+												    <input class="mdl-textfield__input"  class="form-control" type="text" ng-model="modalt.datos.fax" name="fax" pattern="-?[0-9]*(\.[0-9]+)?">
+												    <label class="mdl-textfield__label" for=""></label>
+												    <span class="mdl-textfield__error">No es un número válido</span>
+
+												</div>
+
+
+										</div>
+
+										<div class="mdl-cell mdl-cell--6-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+													<label for="">Latitud</label>
+													 <input class="mdl-textfield__input"  class="form-control" ng-model="modalt.datos.latitud" type="text"  name="">
+										        	<label class="mdl-textfield__label" for=""></label>
+																    
+												</div>
+										</div>
+										<div class="mdl-cell mdl-cell--6-col" >
+										 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+													<label for="">Longitud</label>
+													 <input class="mdl-textfield__input"  class="form-control" ng-model="modalt.datos.longitud" type="text"  name="">
+										        	<label class="mdl-textfield__label" for=""></label>
+																    
+												</div>
+										</div>
+
+									</form>
+						    	</div>
+						   		<div class="mdl-dialog__actions">
+						    		<button ng-click="generartienda()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored {{modalt.bcolor}}" type="submit">
+						    			{{modalt.boton}}
+									</button>
+						  		</div>
+						 		</div>
+							</div>
+
+						 	</dialog>
+
+					

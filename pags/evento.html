@@ -1,0 +1,86 @@
+                 <div class="vistafondo eventofondo" >
+
+                        <div class="mdl-grid eventoart">
+                        
+		                      <div class="fechaevent mdl-grid mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-card mdl-shadow--4dp">
+                                <div class="fechabu mdl-cell mdl-cell--12-col">
+                                    <h2 class="mdl-card__title-text ">Buscar por fecha:</h2>
+                                 </div>
+								            <div class="mdl-cell mdl-cell--4-col-tablet mdl-cell--4-col">
+
+                                 <div class="mdl-card__supporting-text">
+                                    	<p><i class="material-icons">date_range</i>Desde </p>
+							    				           <input id="fechas1" data-date-format="dd/mm/yyyy" class="mdl-textfield__input" ng-model="fech1" placeholder="dd/mm/aaa" type="date" >				   
+                                </div>
+                                     
+                            </div>
+
+                            <div class="mdl-cell mdl-cell--4-col-tablet mdl-cell--4-col">
+
+                                <div class="mdl-card__supporting-text">
+                                    	<p><i class="material-icons">date_range</i>Hasta</p>
+                                    						 							  					
+							    				         <input id="fechas2" data-date-format="dd/mm/yyyy" class="mdl-textfield__input" ng-model="fech2" placeholder="dd/mm/aaa" type="date">				   
+                                </div>
+                                     
+                            </div>
+                            <div class="mdl-cell mdl-cell--12-col-tablet mdl-cell--4-col">
+
+                                <div class="mdl-card__supporting-text mdl-typography--text-center"><br>
+                                    <button ng-click="buscarxFecha()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+  										                Buscar
+									                 </button>
+                                </div>
+                                     
+                            </div>
+                          </div>
+                          <div ng-repeat="evento in eventos" class="mdl-grid mdl-cell mdl-cell--12-col mdl-cell--4-col-tablet mdl-card mdl-shadow--4dp">
+
+                            <div class="mdl-card__media mdl-cell--7-col mdl-cell--12-col-tablet">
+                                <img class="articuloimg" ng-src="{{evento.imagen}}" border="0" alt="">
+                            </div>
+                            <div class="eventodatos mdl-cell mdl-cell--4d-col">
+                                  <h4 class="mdl-typography--text-center mdl-card__title-text">{{evento.nombre}}</h4>
+                            <div class="mdl-grid">
+									 	          <div class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet">
+		                              <div class="mdl-card__supporting-text">
+		                                  <p>Fecha: {{evento.fecha | vfecha}}</p>
+		                                  <p>Precio: {{evento.precio | euros: '€'}}</p>
+		                                  <p>Lugar: {{evento.lugar[0].lugar}}</p>
+		                                  <p>Descripción: <br>{{evento.descripcion}}</p>
+		                                  <p>Aforo: {{evento.aforo}} personas</p>
+                                      <p>Entradas: {{evento.entradas_disponibles}}</p>
+		                              </div>
+                              </div>
+                              <div class="migrupo mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet" class="mdl-card__supporting-text"">
+                                  <div ng-show="evento.participantes[0][0].grupo[0].nombre">
+                                      <p><div class="mdl-layout-spacer"></div><i class="material-icons">star</i> Grupo: {{evento.participantes[0][0].grupo[0].nombre}}</p>
+                                  </div>
+                     
+                                  <div ng-show="evento.participantes[0]"><i class="material-icons">star</i> Participantes:
+	                                   <div ng-repeat="participante in evento.participantes">
+												                    <span>
+	                                        	- {{participante[0].nombre}} {{participante[0].apellido1}} {{participante[0].apellido2}}
+												                    </span>
+	                                   </div>
+                                  </div>
+
+                            </div>
+                                  <div class="evencant mdl-card__supporting-text">
+                                            Cantidad: <input  ng-model="cantidadeve" type="number">
+                                  </div>
+                                   </div>
+
+                                        <div class="mdl-typography--text-center">
+                                          <p> <button ng-disabled="evento.entradas_disponibles ==0" ng-click="reservareve()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+	  										                  Reservar
+										                        </button>
+                                        </p>
+								                      	</div>	
+                              </div>
+                                     
+                               
+                           </div>
+
+                      </div>
+                </div>

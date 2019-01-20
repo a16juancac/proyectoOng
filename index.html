@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="ongApp">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Datus</title>
+	<link rel="stylesheet" href="plugins/normalize/normalize.css">
+	<link rel="stylesheet" href="plugins/mdl/material.min.css">
+	<link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="css/material.min.css">
+	<link rel="stylesheet" href="plugins/polyfill/polyfill.css">
+	<link rel="stylesheet" href="css/estilos.css">
+	<link rel="icon" href="img/marca/favicon.ico">
+</head>
+<body ng-controller="mainCtrl">
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  		<header class="mdl-layout__header">
+	    	<div class="mdl-layout__header-row">
+	 
+				<img class="datus" src="img/marca/marca.jpg" alt="">
+
+				<div class="mdl-layout-spacer"></div>
+					
+				<nav class="mdl-navigation mdl-layout--large-screen-only">
+					 
+						<a class="home mdl-navigation__link" href="#home"><i class="material-icons">home</i> Home</a>
+						<div>
+							<a id="tienda"
+	        					class="tienda mdl-navigation__link" href="#tienda"><i class="material-icons">shopping_cart</i> Tienda</a>
+
+						</div>
+
+						<a   class="eventos mdl-navigation__link" href="#evento"><i class="material-icons">event</i> Eventos</a>
+						<div ng-if="loading">
+							<a  href class="login mdl-navigation__link"><i class="material-icons">account_box</i> Login</a>
+						</div>
+						<div ng-if="loading">
+							<a href class="registrarse mdl-navigation__link"><i class="material-icons">create</i> Registrarse</a>
+						</div>
+						
+						
+						<a href="#administrador" ng-if="paneladmi" class="tienda mdl-navigation__link"><i class="material-icons">work</i> Panel</a>
+						<a href="#gestor" ng-if="panelgest" class="tienda mdl-navigation__link"><i class="material-icons">work</i> Panel</a>
+						<a href="#cliente" ng-if="panelcliente" class="tienda mdl-navigation__link"><i class="material-icons">work</i> Panel</a>
+						
+				</nav>
+				
+			</div>
+
+
+		</header>
+
+
+		  <div class="mdl-layout__drawer mdl-layout--small-screen-only">
+		  	<button class="xboton mdl-button mdl-js-button mdl-js-ripple-effect">
+		  		<span><i class="material-icons">close</i></span>
+		  	</button>
+		    <img class="datusrespo" src="img/marca/marca.jpg" alt="">
+		    <nav class="mdl-navigation">
+		     <a class="home mdl-navigation__link" href="#home"><i class="material-icons">home</i> Home</a>
+
+			<a  class="tienda mdl-navigation__link" href="#tienda"><i class="material-icons">shopping_cart</i> Tienda</a>
+						
+			<a  class="eventos mdl-navigation__link" href="#evento"><i class="material-icons">event</i> Eventos</a>
+						
+			<a  href="" ng-if="loading" class="minlogin mdl-navigation__link"><i class="material-icons">account_box</i> Login</a>
+			<a href="" ng-if="loading" class="minregistrarse mdl-navigation__link"><i class="material-icons">create</i> Registrarse</a>
+			<a ng-if="panelgest" class="eventos mdl-navigation__link" href="#gestor"><i class="material-icons">work</i> Panel</a>
+			<a  ng-if="paneladmi" class="eventos mdl-navigation__link" href="#administrador"><i class="material-icons">work</i> Panel</a>
+			<a  ng-if="panelcliente" class="eventos mdl-navigation__link" href="#cliente"><i class="material-icons">work</i> Panel</a>
+		    </nav>
+		  </div>
+
+
+				<main class="demo mdl-layout__content">
+					
+				      <div id="main" class="page-content">
+				      	
+	
+				      	<div ng-view>
+						</div>
+						
+						
+
+   					 </div>
+				
+					
+				  </div>  
+				</main>
+
+
+		</div>
+				
+				<dialog  class="logearse mdl-dialog mdl-typography--text-center">
+					<div ng-controller="loginCtr">
+				  	 <button type="button" class="mdl-button close"><i class="material-icons">close</i>
+					</button>
+				    <h4 class="mdl-dialog__title mdl-typography--text-center">Login</h4><br>
+
+					<span class="mdl-list__item-primary-content">
+						<i class="material-icons mdl-list__item-avatar">person</i>
+					</span>
+				    <div class="mdl-dialog__content">
+				       
+						 								              
+							 <form    ng-submit="login()" class="">
+							     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								        <input ng-model="usuario.email" class="mdl-textfield__input" type="text" id="usuario">
+								        <label class="mdl-textfield__label" for="Name">Usuario</label>
+									       <span class="mdl-textfield__error">No es un email válido</span>
+									   </div>
+								                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								 		     <input ng-model="usuario.password" class="mdl-textfield__input" type="password" id="Email">
+										      <label class="mdl-textfield__label" for="Email">Password</label>
+									   </div>
+
+				    		
+				    			<div class="mdl-dialog__actions">
+				       			<button  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">
+								Acceder
+								</button>
+				    			</div>
+				    		 </form>
+							
+				    	</div>
+				   </div>
+				 </dialog>
+
+				<dialog  class="registro mdl-dialog">
+					<div  ng-controller="registroCtr">
+				  	 <button type="button" class="mdl-button close"><i class="material-icons">close</i>
+					</button>
+				    <h4 class="mdl-dialog__title mdl-typography--text-center">Registrarse</h4><br>
+
+				    <div class="mdl-dialog__content">
+						 								              
+							 <form  class="">
+							  <div class="mdl-grid">
+							  	<div class="mdl-cell mdl-cell--6-col" >
+							     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								        <input ng-model="usuario.nombre" class="mdl-textfield__input" pattern="[A-Z,a-z, ]*" type="text" id="nombre">
+								        <label class="mdl-textfield__label" for="Name">Nombre</label>
+									    <span class="mdl-textfield__error">Sólo letras</span>
+								 </div>
+								 </div>
+
+								 <div class="mdl-cell mdl-cell--6-col" >
+								 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								        <input ng-model="usuario.apellido1" class="mdl-textfield__input" pattern="[A-Z,a-z, ]*" type="text" id="apellido1">
+								        <label class="mdl-textfield__label" for="Name">Primer Apellido</label>
+									    <span class="mdl-textfield__error">Sólo letras</span>
+								</div>
+								</div>
+
+								<div class="mdl-cell mdl-cell--6-col" >
+								 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								        <input ng-model="usuario.apellido2" class="mdl-textfield__input" pattern="[A-Z,a-z, ]*" type="text" id="apellido2">
+								        <label class="mdl-textfield__label" for="Name">Segundo Apellido</label>
+									    <span class="mdl-textfield__error">Sólo letras</span>
+								</div>
+								</div>
+
+								<div class="mdl-cell mdl-cell--6-col" >
+								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								    <input ng-model="usuario.nif" class="mdl-textfield__input" type="text" id="nif">
+								    <label class="mdl-textfield__label" for="">NIF</label>
+								 </div>
+								</div>
+
+								<div class="mdl-cell mdl-cell--12-col" >
+								 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								    <input ng-model="usuario.direccion" class="mdl-textfield__input"   id="direccion">
+								    <label class="mdl-textfield__label" for="sample4">Dirección</label>
+								 </div>
+								</div>
+
+								<div class="mdl-cell mdl-cell--6-col" >
+								 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								    <input ng-model="usuario.localidad" class="mdl-textfield__input"  id="localidad">
+								    <label class="mdl-textfield__label" for="sample4">Localidad</label>
+								 </div>
+								</div>
+
+								<div class="mdl-cell mdl-cell--6-col" >
+								 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								    <input ng-model="usuario.provincia" class="mdl-textfield__input" id="provincia">
+								    <label class="mdl-textfield__label" for="sample4">Provincia</label>
+								 </div>
+								</div>
+
+								<div class="mdl-cell mdl-cell--6-col" >
+								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								    <input ng-model="usuario.telefono" class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="telefono">
+								    <label class="mdl-textfield__label" for="sample4">Teléfono</label>
+								    <span class="mdl-textfield__error">No es un número</span>
+								 </div>
+								</div>
+								<div class="mdl-cell mdl-cell--6-col" >
+								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								    <input ng-model="usuario.email" class="mdl-textfield__input" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" id="email">
+								    <label class="mdl-textfield__label" for="sample4">Email</label>
+								    <span class="mdl-textfield__error">No es un email válido</span>
+								 </div>
+								</div>
+
+								<div class="mdl-cell mdl-cell--6-col" >
+								  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								 		     <input ng-model="usuario.password" class="mdl-textfield__input" type="password" id="password">
+										      <label class="mdl-textfield__label" for="Email">Password</label>
+								 </div>
+								</div>
+								<div class="mdl-cell mdl-cell--6-col" >
+								  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								 		     <input ng-model="usuario.repitepassword" class="mdl-textfield__input" type="password" id="rpassword">
+										      <label class="mdl-textfield__label" for="Email">Repetir password</label>
+								 </div>
+								</div>
+							 </div>
+							 </form>
+				    </div>
+				    <div class="mdl-dialog__actions">
+				       <button ng-click="registrarse()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">
+						Enviar
+						</button>
+				    </div>
+
+				    </div>
+				 </dialog>
+
+
+<script src="plugins/jquery/jquery.js"></script>
+<script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="plugins/angular/angular.js"></script>
+<script src="plugins/angular/angular-route.js"></script>
+<script src="plugins/mdl/material.min.js"></script>
+<script src="plugins/polyfill/polyfill.js"></script>
+<script src="plugins/uibootstrap/uibootstrap.min.js"></script>
+<script type="text/javascript"  src="https://maps.google.com/maps/api/js?key=AIzaSyDiQcOrJUgcu5x7oT-y6r2AtRC3b5t6o6M"></script>
+<script src="plugins/googlemaps/lodash.underscore.min.js"></script>
+ <script src="plugins/googlemaps/angular-google-maps.min.js"></script>
+<script src="js/rutinas.js"></script>
+<script src="comp/home.js"></script>
+<script src="comp/gestor.js"></script>
+<script src="comp/productos.js"></script>
+<script src="comp/evento.js"></script>
+<script src="comp/administrador.js"></script>
+<script src="comp/cliente.js"></script>
+<!-- <script src="comp/home.js"></script> -->
+<script src="js/protos.js"></script>
+</body>
+</html>

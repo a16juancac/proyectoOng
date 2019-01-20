@@ -1,0 +1,181 @@
+
+
+<div class="vistafondo mdl-grid">
+        <div class="lista mdl-cell mdl-cell--12-col-phone mdl-cell--12-col-tablet mdl-cell--3-col-desktop mdl-cell--stretch">       
+
+          <div class="contienelista mdl-card mdl-shadow--4dp">
+            <div class="eligetl mdl-layout-title">Elige la tienda: </div>
+            <ul class="listatienda mdl-list mdl-typography--text-center">
+              <div ng-repeat="tienda in tiendas">
+                
+                      <li  class="mdl-list__item">
+                          <span class="mdl-list__item-primary-content"> 
+                            <i class="material-icons mdl-list__item-avatar">store</i>
+                          </span>
+                          
+                          <span class="mdl-list__item-primary-content mdl-typography--text-center">
+                          Tienda {{tienda.nombre}}
+                          </span>
+
+                          <span class="mdl-typography--text-right">
+                            <button ng-click="ubicacion()" class="ubica mdl-button mdl-js-button mdl-button--icon mdl-button--fab mdl-button--mini-fab">
+                            <i class="material-icons">place</i>
+                            </button>
+                          </span>
+
+                      </li>
+
+                      <span class="mdl-list__item-sub-title">
+                        {{tienda.direccion}} {{tienda.codigo_postal}} {{tienda.ciudad}}
+                      </span><br>
+                      <span class="mdl-list__item-sub-title">
+                        Teléfono {{tienda.telefono}}
+                      </span>
+
+                <li class="categ" >
+                  <button ng-click="verproductos()" class="tiendasbtn mdl-button mdl-js-button mdl-button--raised mdl-button--accent">Productos</button><div class="mdl-layout-spacer"></div>
+                  <div ng-if="catevisible">
+                  <span class="cate mdl-chip">
+                  <a  href="" ng-click="mostrarLista(this)">
+                    <span class=" mdl-chip__text">Categorías</span>
+                  </a>
+                  </span>
+                  <div class="mdl-layout-spacer"></div>
+                  <div ng-if ="verlista">
+                      <span class="mdl-list__item-secondary-content"> 
+                        <a class="mdl-list__item-secondary-action"><i class="material-icons">expand_more</i></a>
+                      </span>
+                      <ul  class="mdl-list">
+                         <li>
+                           <a href=""> <span class="mdl-chip">
+                                <span class="mdl-chip__text" ng-click="verproductos()">Todos</span>
+                               </span>
+                           </a>
+                              <div ng-repeat="categoria in categorias">
+                              <span  class="mdl-list__item-sub-title"><a  href="" ng-click="verxCategoria()"><span class="mdl-chip">
+                              <span class="mdl-chip__text">{{categoria.nombre}}</a></span> 
+                              </div>
+                          </li>
+                      </ul>
+                </div>
+                </li>
+              </div>
+                    
+              </li>
+             
+            </ul>
+          </div>
+        </div>
+
+        
+            <main class="mdl-layout__content">
+                <div class="page-content">
+                  <div class="mdl-grid misproductos" >
+ 								     <div class="categorias mdl-cell mdl-cell--12-col-tablet mdl-cell--12-col-desktop mdl-shadow--4dp mdl-cell--stretch">
+		                      <div class="mdl-layout__header-row ">
+		                          <nav class="mdl-navigation mdl-typography--body-1-force-preferred-font ">
+		                              <span>Productos</span>
+		                          </nav>
+		                      </div>
+		                 </div>
+             
+								<div  class="mdl-grid" >
+
+								  <div class="contproduc mdl-cell  mdl-card mdl-shadow--4dp" ng-repeat="producto in productos">				               
+				                    <div class="mdl-card__title">
+				                        <h2 class="mdl-card__title-text">{{producto.nombre}}</h2>
+				                    </div>
+				                    <div class="imasize mdl-card__media  mdl-typography--text-center">
+				                        <a href="" ng-click="modalprodu(this)"><img  class="articuloimg" ng-src="{{producto.imagen[0].ruta}}" border="0" alt=""></a>
+				                    </div>
+				                    <div class="mdl-card__supporting-text">
+				                       Descripción: {{producto.descripcion}}
+				                    </div>
+                            <div class="mdl-card__supporting-text">
+                               Stock: {{producto.stock}} unidades
+                            </div>
+                            <div class="mdl-card__supporting-text">Tienda {{producto.tienda[0].nombre}}</div>
+				                    <div class="mdl-card__supporting-text">
+				                       Precio: {{producto.precio | euros: '€'}}
+				                    </div>
+                            <div class="mdl-card__supporting-text">
+                               Cantidad: <input  ng-model="cantidad" type="number">
+                            </div>
+
+                            <div class="mdl-card__supporting-text">
+                            <button ng-click="reservar()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                            Reservar
+                            </button>
+                           </div>
+				                   
+				            </div>
+                </div>
+				</div>
+				</div>
+
+            </main>
+    
+             <!--  modal con carrusel-->
+
+              <dialog class="produmodal mdl-dialog mdl-typography--text-center">
+                <button type="button" class="mdl-button close"><i class="material-icons">close</i>
+                      </button>
+                      <h4 class="mdl-dialog__title mdl-typography--text-center">{{produ.nombre}}</h4><br>
+                      <div class="mdl-dialog__content">            
+                         <form  class="">
+                             <div id="slides_control">
+                                  <div>
+                                    <carousel interval="myInterval">
+                                      <slide ng-repeat="slide in slides" active="slide.active">
+                                        <img ng-src="{{slide.image}}">
+                                        <div class="carousel-caption">
+                                          <h4>Imagen {{$index+1}}</h4>
+                                        </div>
+                                      </slide>
+                                    </carousel>
+                                 </div>
+                               </div>
+                              <div class="mdl-card__supporting-text">
+                               Descripción: {{produ.descripcion}}
+                              </div>
+                              <div class="mdl-card__supporting-text">
+                               Precio: {{produ.precio | euros: '€'}}
+                              </div>
+                       </form>
+                    </div>
+                      
+              </dialog>
+        <dialog class="ubicacion mdl-dialog mdl-typography--text-center">
+             <button type="button" class="mdl-button close"><i class="material-icons">close</i>
+          </button>
+                      <h4 class="mdl-dialog__title mdl-typography--text-center">Tienda {{tiend.nombre}}</h4><br>
+                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                   {{tiend.direccion}} CP {{tiend.codigo_postal}} {{tiend.ciudad}}<br>
+                                   Teléfono {{tiend.telefono}}
+                      </div>
+                      <div class="mdl-dialog__content">            
+                      
+                          
+                            <div class="mapcont mdl-card__media  mdl-typography--text-center">
+                              <div class="angular-google-map-container" >
+                              <google-map center="map.center" zoom="map.zoom" draggable="true" options="map.options" control="map.control">
+                                 <markers models="map.markers" coords="'self'" options="'options'" isLabel='true'>
+                                  </markers> 
+                              </google-map>
+                              </div>  
+                            </div>
+                          
+  
+                        
+                    </div>
+            </div>
+         </dialog>
+ 
+        
+	</div>
+
+
+
+
+
+</div>

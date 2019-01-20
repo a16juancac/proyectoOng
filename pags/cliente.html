@@ -1,0 +1,271 @@
+<div class="vistafondo panelfondo">
+ <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+      <header class="headergestion mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600 mdl-typography--text-center">
+        <div class="mdl-layout__header-row mdl-typography--text-center">
+          <span class="mdl-layout-title"><i class="material-icons" >work</i> Panel de Cliente</span>
+          <div class="mdl-layout-spacer"></div>
+        </div>
+        <div class="misesion"> <a ng-click="cerrarSesion()" class="cerrarsesi mdl-color-text--blue-grey-50 mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-50 material-icons" >cancel</i> Cerrar sesión</a></div>
+      </header>
+      <div class="gestorbarra mdl-layout__drawer">
+        <header class="cabeceragestor mdl-typography--text-center">
+          <img src="img/usuario/avatar3.jpg" class="avatar">
+          <div class="demo-avatar-dropdown">
+            <span>{{user.email}}</span>
+            <div class="mdl-layout-spacer"></div>
+            <button sidabled class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+              <i class="material-icons" >arrow_drop_down</i>
+              <span class="visuallyhidden">Accounts</span>
+            </button>
+          </div>
+          <a ng-click="editarPerfil()" class="editarperfi mdl-color-text--blue-grey-50 mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-50 material-icons" >edit</i> Editar perfil</a><br>
+ 
+             <div class="mdl-layout-spacer"></div>
+        </header>
+  		
+        <nav class="barragestor mdl-navigation">
+		
+		<div class="titulobarra">
+        <span>Lista de reservas</span>
+        </div>
+		<div>
+			<a class="mdl-color-text--blue-grey-50 mdl-navigation__link" ng-click="verlosproductos()" href=""><i class=" material-icons" role="presentation" >shopping_cart</i>Productos</a>
+		</div>
+		<div>
+			<a class="mdl-color-text--blue-grey-50 mdl-navigation__link" ng-click="verloseventos()" href=""><i class=" material-icons" role="presentation" >event</i>Eventos</a>
+		</div>
+        </nav>
+      </div>
+
+      <main class="panel mdl-layout__content mdl-color--grey-100 vistafondo panelfondo">
+
+			<div  ng-if="perfilvisible" class="editarmiperfi">
+							<h4><i class="material-icons">edit</i> Editar Perfil</h4>
+ 							<form  class="">
+							  <div class="mdl-grid">
+							  	<div class="mdl-cell mdl-cell--3-col" >
+							     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+							     		<label for=""><i class="material-icons">face</i> Nombre</label>
+								        <input ng-model="perfil.nombre" class="mdl-textfield__input" pattern="[A-Z,a-z, ]*" type="text" >
+								        <label class="mdl-textfield__label" for="Name"></label>
+									    <span class="mdl-textfield__error">Sólo letras</span>
+								 </div>
+								 </div>
+
+								 <div class="mdl-cell mdl-cell--4-col" >
+								 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								        <label for=""><i class="material-icons">portrait</i> Primer Apellido</label>
+								        <input ng-model="perfil.apellido1" class="mdl-textfield__input" pattern="[A-Z,a-z, ]*" type="text" >
+								        <label class="mdl-textfield__label" for=""></label>
+									    <span class="mdl-textfield__error">Sólo letras</span>
+								</div>
+								</div>
+
+								<div class="mdl-cell mdl-cell--4-col" >
+								 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								 		<label for=""><i class="material-icons">portrait</i> Segundo Apellido</label>
+								        <input ng-model="perfil.apellido2" class="mdl-textfield__input" pattern="[A-Z,a-z, ]*" type="text" >
+								        <label class="mdl-textfield__label" for="Name"></label>
+									    <span class="mdl-textfield__error">Sólo letras</span>
+								</div>
+								</div>
+
+								
+								 <div class="mdl-cell mdl-cell--4-col" >
+								 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								        <label for=""><i class="material-icons">payment</i> NIF</label>
+								        <input ng-model="perfil.NIF" class="mdl-textfield__input" type="text" >
+								        <label class="mdl-textfield__label" for=""></label>
+									   
+								</div>
+								</div>
+
+								<div class="mdl-cell mdl-cell--8-col" >
+								 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								 	<label for=""><i class="material-icons">location_on</i> Dirección</label>
+								    <input ng-model="perfil.direccion" class="mdl-textfield__input"  >
+								    <label class="mdl-textfield__label" for="sample4"></label>
+								 </div>
+								</div>
+
+								<div class="mdl-cell mdl-cell--4-col" >
+								 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								 	<label for=""><i class="material-icons">location_on</i> Localidad</label>
+								    <input ng-model="perfil.localidad" class="mdl-textfield__input"  >
+								    <label class="mdl-textfield__label" for="sample4"></label>
+								 </div>
+								</div>
+
+								<div class="mdl-cell mdl-cell--4-col" >
+								 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								 	<label for=""><i class="material-icons">location_on</i> Provincia</label>
+								    <input ng-model="perfil.provincia" class="mdl-textfield__input" >
+								    <label class="mdl-textfield__label" for="sample4"></label>
+								 </div>
+								</div>
+
+								<div class="mdl-cell mdl-cell--4-col" >
+								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+									 <label for=""><i class="material-icons">phone</i> Teléfono</label>
+								    <input ng-model="perfil.telefono" class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" >
+								    <label class="mdl-textfield__label" for="sample4"></label>
+								    <span class="mdl-textfield__error">No es un número</span>
+								 </div>
+								</div>
+								<div class="mdl-cell mdl-cell--4-col" >
+								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+									<label for=""><i class="material-icons">mail</i> Email</label>
+								    <input ng-model="perfil.email" class="mdl-textfield__input" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+								    <label class="mdl-textfield__label" for="sample4"></label>
+								    <span class="mdl-textfield__error">No es un email válido</span>
+								 </div>
+								</div>
+
+								<div class="mdl-cell mdl-cell--4-col" >
+								  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								  			<label for=""><i class="material-icons">security</i> Password</label>
+
+								 		     <input ng-model="perfil.password" class="mdl-textfield__input" type="password">
+										      <label class="mdl-textfield__label" for="Email"></label>
+								 </div>
+								</div>
+							 </div>
+							 </form>
+				    
+				    <div class="mdl-dialog__actions">
+				       <button ng-click="cambiarPerfil()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">
+						Modificar
+						</button>
+				    </div>
+
+				</div>
+
+
+					<div ng-if="productousuvisible">
+			 	    <div class="fechaeventgest mdl-grid mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-card mdl-shadow--4dp">
+                                <div class="fechabu mdl-cell mdl-cell--12-col">
+                                    <h2 class="mdl-card__title-text ">Buscar por fecha:</h2>
+                                 </div>
+								        <div class="mdl-cell mdl-cell--4-col-tablet mdl-cell--4-col">
+
+                                    <div class="mdl-card__supporting-text">
+                                    	<p><i class="material-icons">date_range</i>Desde </p>
+    					 							
+							    				<input data-date-format="dd/mm/yyyy" class="mdl-textfield__input" id="fecha1pc" placeholder="dd/mm/aaa" type="date">				   
+                                    </div>
+                                     
+                                </div>
+
+                                <div class="mdl-cell mdl-cell--4-col-tablet mdl-cell--4-col">
+
+                                    <div class="mdl-card__supporting-text">
+                                    	<p><i class="material-icons">date_range</i>Hasta</p>
+                                    						 							  					
+							    	<input data-date-format="dd/mm/yyyy" class="mdl-textfield__input" id="fecha2pc"  type="date">			   
+                                    </div>
+                                     
+                                </div>
+                                <div class="mdl-cell mdl-cell--12-col-tablet mdl-cell--4-col">
+
+                                    <div class="mdl-card__supporting-text mdl-typography--text-center"><br>
+                                    	<button ng-click="buscarxFechaprodu()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+  										                Buscar
+									                   </button>
+                                    </div>
+                                     
+                                </div>
+            				</div>
+			
+
+			<table class="tbleventot mdl-data-table mdl-js-data-table mdl-data-table--sectable mdl-shadow--2dp">
+				<caption > <h5>Lista de productos reservados <span class="badge">Total: {{listaproducto.length}}</span></h5></caption>
+					<thead>
+						<tr>
+							
+							<th class="tbtienda mdl-data-table__cell--non-numeric">Producto</th>
+							<th class="tbtienda">Cantidad</th>
+							<th class="tbtienda">Precio</th>
+							<th class="tbtienda mdl-data-table__cell--non-numeric">Fecha</th>
+						</tr>
+					</thead>
+					<tbody>
+							
+						<tr ng-repeat="listapr in listaproducto">
+										
+					
+							<td class="tbnombre mdl-data-table__cell--non-numeric">{{listapr.producto}}</td>
+							<td class="tbnombre mdl-data-table__cell--non-numeric">{{listapr.cantidad}}</td>
+							<td class="tbnombre mdl-data-table__cell--non-numeric">{{listapr.precio_total | euros: '€'}}</td>
+							<td class="tbtienda mdl-data-table__cell--non-numeric">{{listapr.fecha | vfecha}}</td>
+						
+						</tr>
+					</tbody>	
+			</table>
+		</div>
+
+			<div ng-if="eventousuvisible">
+			 	 <div class="fechaeventgest mdl-grid mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-card mdl-shadow--4dp">
+                                <div class="fechabu mdl-cell mdl-cell--12-col">
+                                    <h2 class="mdl-card__title-text ">Buscar por fecha:</h2>
+                                 </div>
+								        <div class="mdl-cell mdl-cell--4-col-tablet mdl-cell--4-col">
+
+                                    <div class="mdl-card__supporting-text">
+                                    	<p><i class="material-icons">date_range</i>Desde </p>
+    					 							
+							    				<input data-date-format="dd/mm/yyyy" class="mdl-textfield__input" id="fecha1ec"  placeholder="dd/mm/aaa" type="date">				   
+                                    </div>                       
+                                </div>
+
+                                <div class="mdl-cell mdl-cell--4-col-tablet mdl-cell--4-col">
+
+                                    <div class="mdl-card__supporting-text">
+                                    	<p><i class="material-icons">date_range</i>Hasta</p>
+                                    						 							  					
+							    	<input data-date-format="dd/mm/yyyy" class="mdl-textfield__input" id="fecha2ec" type="date">			   
+                                    </div>
+                                     
+                                </div>
+                                <div class="mdl-cell mdl-cell--12-col-tablet mdl-cell--4-col">
+
+                                    <div class="mdl-card__supporting-text mdl-typography--text-center"><br>
+                                    	<button ng-click="buscarxFechaevent()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+  										                Buscar
+									                   </button>
+                                    </div>
+                                     
+                                </div>
+            				</div>
+			
+
+			<table class="tbleventot mdl-data-table mdl-js-data-table mdl-data-table--sectable mdl-shadow--2dp">
+				<caption > <h5>Lista de eventos reservados <span class="badge">Total: {{listaevento.length}}</span></h5></caption>
+					<thead>
+						<tr>
+							
+							<th class="tbtienda mdl-data-table__cell--non-numeric">Evento</th>
+							<th class="tbtienda">Cantidad</th>
+							<th class="tbtienda">Precio</th>
+							<th class="tbtienda mdl-data-table__cell--non-numeric">Fecha</th>
+						</tr>
+					</thead>
+					<tbody>
+							
+						<tr ng-repeat="listaev in listaevento">
+										
+							
+							<td class="tbtienda mdl-data-table__cell--non-numeric">{{listaev.evento}}</td>
+							<td class="tbtienda mdl-data-table__cell--non-numeric">{{listaev.cantidad}}</td>
+							<td class="tbnombre mdl-data-table__cell--non-numeric">{{listaev.precio_total | euros: '€'}}</td>
+							<td class="tbtienda mdl-data-table__cell--non-numeric">{{listaev.fecha | vfecha}}</td>		
+						</tr>
+					</tbody>	
+			</table>
+		</div>
+
+
+      </main>
+    </div>
+</div>
+
+						

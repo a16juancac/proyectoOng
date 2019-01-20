@@ -1,0 +1,881 @@
+.demo {
+
+background-color: #f3f3f3;
+}
+
+.datus{
+
+width: 120px;
+
+border-radius: 20px;
+
+}
+
+.datusrespo{
+width: 200px;
+
+border-radius: 20px;
+
+
+}
+
+.datushome{
+width: 400px;
+
+border-radius: 20px;
+
+
+}
+
+.mdl-layout__drawer{
+  height: 420px;
+}
+
+
+.logearse h4, .registro h4{
+  color: grey;
+}
+/*Boton responsive*/
+
+.btnresponsive {
+      position: fixed;
+      display: block;
+      right: 0;
+      bottom: 0;
+      margin-right: 40px;
+      margin-bottom: 40px;
+      z-index: 900;
+      background: #663399 !important;
+    }
+
+/*columnas*/
+.content-grid {
+  max-width: 960px;
+
+}
+
+.mdl-layout__tab-bar{
+
+  width: 100%;
+}
+
+.formusize {
+  padding-top: 50px;
+  max-width: 400px;
+  margin: auto;
+  height: 500px;
+}
+
+
+.formut form {
+  max-width: 300px;
+  margin: auto;
+  padding-left: 2px;
+}
+
+img.articuloimg {
+  width: 100%;
+  height: auto;
+}
+
+.eventoart {
+  max-width: 1000px;
+  margin: auto;
+}
+
+.fechaevent{
+
+   max-width: 660px;
+  margin: auto;
+  background: #FF5722;
+  color: #F3F3F3 !important;
+}
+
+.fechaeventgest{
+
+  margin-top: 20px;
+  max-width: 660px;
+ margin-right: auto;
+ margin-left: auto;
+  background: #FF5722;
+  color: #F3F3F3 !important;
+}
+
+.fechaevent input, .fechaevent p, .fechaeventgest input, .fechaeventgest p{
+
+  color: #F3F3F3;
+}
+.fechaevent p, .fechaeventgest p{
+
+  font-size:20px;
+}
+
+.migrupo, .migrupo p, .eventodatos p, .migrupo li{
+
+  font-size: 14px !important;
+  color: #7A7A7A!important;
+  font-family: 'Roboto', sans-serif;
+}
+
+.eventodatos{
+  width: 395px;
+  font-size: 12px !important;
+
+font-family: 'Roboto', sans-serif;
+}
+
+.eventodatos{
+
+  margin-top: 0px;
+}
+
+.eventodatos .mdl-grid{
+
+  width: auto;
+}
+.migrupo  .material-icons{
+
+  font-size: 10px !important;
+
+
+}
+
+.btncompartir{
+  
+  position: relative;
+  float: right;
+  top: -4px;
+}
+
+.xboton{
+  margin-left: 170px;
+}
+
+
+
+.registro{
+
+  width: 500px;
+}
+
+
+
+
+
+.section1{
+
+position: relative;
+  height: 600px;
+  width: auto;
+  background-color: #f3f3f3;
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.3),
+      rgba(0, 0, 0, 0.3)
+    ), url('../img/portada/picjumbo.jpg') center 30% no-repeat;
+  background-size: cover;
+  color: white;
+
+}
+
+.section2{
+
+position: relative;
+  height: 360px;
+  width: auto;
+  background-color: #f3f3f3;
+  background-size: cover;
+
+
+}
+
+
+.section2 h4{
+
+
+padding-right: 40px;
+padding-left: 40px;
+}
+
+.section2 img, .section3 img{
+
+width: 17%;
+
+border-radius: 100px;
+}
+
+.section3{
+
+position: relative;
+  height: 600px;
+  width: auto;
+  background-color: #f3f3f3;
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ), url('../img/portada/picjumbo2.jpg') center 30% no-repeat;
+  background-size: cover;
+  color: white;
+
+}
+
+
+.section1 .fuente{
+
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  line-height: 1;
+  color: white;
+  font-weight: 400;
+  font-size: 60px;
+  padding-top: 180px;
+}
+
+.section3 .fuente2{
+
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  line-height: 1;
+  color: white;
+  font-weight: 350;
+  font-size: 60px;
+  padding-top: 100px;
+}
+
+.section3 h4{
+
+padding-right: 40px;
+padding-left: 40px;
+}
+.participahome{
+
+  padding-top: 36px;
+}
+
+.btnabajo1{
+   position: absolute;
+  right: 8%;
+  bottom: -26px;
+  background: #8FBC8F !important;
+  color: black !important;
+}
+
+
+
+
+/*TABLA */
+/*boton borrar tabla*/
+.mdl-data-table {
+    table-layout:fixed;
+    width:80%; 
+}
+
+
+#mitabla{
+  margin-top:24px;
+
+}
+
+#mitabla .material-icons {
+  vertical-align: -50%;
+
+}
+
+
+.btnborrar{
+background: #DC143C !important;
+color: white;
+
+}
+/*boton añadir tabla*/
+.btnplus{
+background: #3CB371 !important;
+color: white;
+right: 20%;
+
+}
+
+.btneditar{
+
+background: #1E90FF !important;
+color: white;
+
+
+}
+
+.btnlugar{
+  background: #696969 !important;
+  color: white;
+
+
+}
+
+.btnparticipante{
+background: #663399 !important;
+color: white;
+
+}
+
+.btnplusparti{
+background: #3CB371 !important;
+color: white;
+
+  
+
+}
+
+.btnborrarparti{
+  background: #DC143C !important;
+  color: white;
+
+}
+
+
+.btnborrarparti, .btnplusparti{
+
+  top: 5px;
+  right: 1px;
+}
+
+.btnfecha {
+
+  background: #FF377F !important;
+  color: white;
+}
+
+table{
+
+  top: 5px;
+}
+
+
+.tblsize th, {
+
+
+  font-size: 15px !important;
+  width: 120px;
+
+
+}
+.tblsize {
+
+  left: 90px !important;
+}
+
+.tblevento{
+left: 35px !important;
+
+}
+
+.tblevento th{
+
+  font-size: 15px !important;
+  width: 200px;
+/*  height: 70px;*/
+}
+
+
+
+.tbbotoneve{
+
+  width: 170px !important;
+  text-align:center !important;
+
+}
+
+ .btnpart{
+
+  margin-top: 5px;
+ }
+
+/*modal de tabla productos*/
+#mRef{
+  width: 750px;
+ 
+
+}
+
+/*modal de tabla evento*/
+#mRefeve, #mRefevelug, #mRefevemodi, #mReftienda{
+  width: 550px;
+ 
+
+}
+
+#mRefparti, #mReffecha{
+  width: 500px;
+
+}
+
+.tarjetaparti, .tarjetafecha{
+
+   margin: auto;
+  width: 450px;
+}
+
+.tarjetaeve, .tarjetamodi, .tarjetatienda{
+
+  margin: auto;
+  width: 500px;
+
+  } 
+
+.tarjeta{
+
+  margin: auto;
+  width: 700px;
+  } 
+
+.tarjeta p, .tarjetaeve p, .tarjetamodi p, .tarjetaparti p, .tarjetafecha p, .tarjetatienda{
+
+ font-size: 23px !important;
+ font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+ color: white;
+ 
+}
+
+.tarjeta .fecha, .tarjetaeve .fecha, .tarjetamodi .fecha, .tarjetaparti .fecha{
+font-size: 18px !important;
+ font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+ color: white;
+
+}
+
+
+
+
+
+
+
+/*colores modal de tabla*/
+
+.rojo{
+
+   background: #DC143C !important
+}
+
+.verde{
+
+  background: #3CB371 !important;
+}
+
+.azul {
+  background: #1E90FF !important;
+
+
+}
+
+.gris {
+
+   background: #696969 !important;
+
+}
+
+.violeta{
+   background: #663399 !important;
+
+}
+
+.rosa{
+    background: #FF377F !important;
+
+}
+.home, .tienda, .eventos, .login, .registrarse, .minlogin, .minregistrarse, .usuarioregi{
+
+  font-size: 20px !important;
+}
+
+/*tamaño de div de imagenes de productos*/
+.misproductos {
+  max-width: 800px;
+  margin: auto;
+}
+
+
+
+.misproductos .mdl-card__media{
+
+ height: 350px;
+ background: white;
+}
+
+.misproductos .mdl-card__media img{
+
+  height: 250px;
+  width: 250px;
+}
+
+.htienda{
+
+  background:   #FF7F50 !important;
+   color: white !important;
+}
+
+.eligetl{
+  text-align: center;
+  padding-top: 30px;
+   color: white !important;
+}
+
+
+
+.contienelista{
+color: white !important;
+   width: auto;
+   margin-right: 10px;
+   margin-left: 10px;
+   right:27px;
+   background:   #FF5722 !important;
+}
+
+.contienelista span{
+  color: white !important;
+
+}
+
+.contienelista span .mdl-list__item-sub-title{
+    color: #DCDCDC !important;
+
+}
+
+
+.contienelista a i{
+
+  color:   white !important;
+}
+
+.contienelista i{
+
+  background:   #FF5722 !important;
+}
+
+.lista{
+  margin-top: 26px;
+}
+
+.categorias {
+  background-color:  #FF5722 !important;
+  height: 45px;
+}
+
+.categorias span{
+
+  color: white !important;
+  font-size: 20px !important;
+  padding-bottom: 15px;
+
+}
+
+.categorias .mdl-layout__header-row{
+  text-align: center;
+}
+
+
+ul li a{
+
+  color: #696969 !important;
+}
+
+.tiendasbtn{
+
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+}
+
+
+
+.mdl-grid .mdl-card__media{
+
+
+  background: white;
+}
+
+div a .mdl-chip{
+
+  background: #3CB371 !important;
+  width: 100px;
+}
+
+.cate{
+
+  background: #663399 !important;
+  width: 100px;
+
+}
+
+.imasize{
+
+height: 250px !important;
+
+}
+
+.contproduc{
+
+  width:240px !important;
+}
+
+.produmodal{
+
+   width: 400px;
+
+}
+
+.produmodal img{
+
+  height: 300px !important;
+  width: 300px !important;
+}
+
+/*GOOGLE MAPS*/
+div.map_container {
+    height: 50%;
+    width: 50%;
+    margin: 0px;
+
+    background: #fafafa;
+}
+
+div.map_container {
+    position: relative;
+    float: left;
+    width: 50%;
+    height: 50%;
+}
+
+.angular-google-map-container {
+    position: absolute;
+    top: 60px;
+    bottom: 0;
+    right: 0;
+    left:0px;
+    margin: auto;  
+    width: 90%;
+    height: 75%;
+}
+
+div.controls {
+    float: right;
+    width: 30%;
+}
+
+.markerlabel {
+    font-weight: bold;
+    font-size: 13px;
+    border: 1px solid #333;
+    padding: 2px;
+    background: #fff;
+    color: #333;
+}
+
+.ubicacion{
+ 
+   width: 500px;
+   height: 500px;
+
+}
+
+.ubicacion .mdl-textfield{
+
+width: 400px;
+
+}
+
+
+.ubica, .ubica i{
+  background: #597d89 !important;
+
+}
+.mapcont{
+
+  margin:auto;
+  width: 70% !important;
+    height: 80% !important;
+}
+
+/*tabla de articulos*/
+
+.imgtabla, .imagenmodal{
+
+width: 70px;
+height: 70px;
+
+}
+
+
+.tbimagen, .tbnombre, .tbtienda{
+
+  text-align:left !important;
+    width: 100px !important;
+}
+
+.tbdescripcion{
+   
+    width: 150px !important;
+
+}
+
+.tbprecio{
+  width: 140px !important;
+
+
+}
+
+.tbstock{
+  width: 80px !important;
+
+
+}
+
+.tbentradas{
+  width: 90px !important;
+
+}
+
+.tbboton{
+
+  width: 100px !important;
+  text-align:right !important;
+
+}
+.gestorbarra{
+ background: #FF5722 !important; 
+
+  height: 550px;
+  width: 230px;
+  color: #FFBEAA;
+}
+
+
+
+.gestorbarra .titulobarra{
+
+font-size: 18px;
+padding-left: 5px;
+}
+
+.enlace{
+
+ color: #FFBBAA !important;
+ font-size: 15px;
+}
+
+.avatar{
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+}
+
+.cabeceragestor {
+  padding: 16px;
+  height: 151px;
+}
+
+.headergestion{
+
+  background: #1E90FF !important;
+   text-align: center;
+
+}
+
+.headergestion .mdl-layout-title{
+  color: #F5F5F5;
+  margin-left:300px;
+
+}
+
+
+
+.tbtparti{
+ width: 340px;
+
+}
+
+.tbtparti tr, .tbtparti th, .tbtfechai tr, .tbtfecha th{
+
+   font-size: 15px !important;
+
+}
+
+.tbtfecha tr td{
+  text-align: center !important;
+
+}
+.tbparti{
+    width: 250px !important;
+    text-align: center !important;
+
+}
+
+.tdfecha{
+
+  width: 180px !important;
+}
+
+.panel{
+
+  height: 1300px;
+}
+
+.editarperfi i , .cerrarsesi i {
+
+font-size: 20px !important;
+
+}
+
+.editarmiperfi{
+
+ background: white;
+ width: 700px;
+ color: grey;
+
+}
+
+.editarmiperfi h4{
+
+text-align: center;
+}
+
+
+input[type="number"] {
+    width: 60px;
+}
+
+.eventodatos input[type="number"] {
+    width:100px;
+}
+
+.evencant{
+
+ text-align: center;
+}
+
+.registrohome{
+background: #3CB371 !important;
+
+}
+
+.loginhome{
+
+  width: 120px !important;
+}
+
+.vistafondo{
+
+
+	background: url(../img/portada/fondo.jpg);
+}
+
+.eventofondo, .panelfondo{
+
+
+	width: 100% !important;
+}
+
+.misesion{
+
+  color:white;
+  text-align: right;
+  padding-right: 20px
+}
+
+body{
+	background: url(../img/portada/fondo.jpg);
+}
